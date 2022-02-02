@@ -1,0 +1,28 @@
+network: "FYRE"
+# DO NOT ENABLE THIS IS FOR THE DEVELOPERS!
+# DOING THIS COULD BREAK YOUR SERVER!
+# THIS IS JUST FOR THE TEST SERVER
+# THIS DISABLES TONS OF FUNCTIONS IN THE CORE SO PEOPLE CAN USE THE PLUGIN ON THE TEST SERVER!
+test_server: false
+mongo:
+  host: "localhost"
+  port: 27017
+  user: "root"
+  pass: "password"
+  database: "Neutron"
+  authDatabase: "admin"
+server:
+  name: "Hub-01"
+fancyName:
+  displayName: true
+  tabListName: true
+# For domain it's the ip and the website
+domain: "orbit.rip"
+store: "donate.orbit.rip"
+discord: "discord.orbit.rip"
+teamspeak: "ts.orbit.rip"
+networkname: "Orbit Network"
+servername: "Orbit"
+mainColor: "GOLD"
+secondColor: "WHITE"
+alternativeColor: "GRAY"

@@ -1,0 +1,5 @@
+name: Meteor
+main: cc.fyre.neutron.Neutron
+author: Alfie
+version: 1.0-SNAPSHOT
+depend: [Proton]

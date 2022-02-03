@@ -3,6 +3,7 @@ package cc.fyre.neutron;
 import cc.fyre.neutron.command.parameter.*;
 import cc.fyre.neutron.database.MongoHandler;
 import cc.fyre.neutron.listener.ChatListener;
+import cc.fyre.neutron.notifications.NotificationHandler;
 import cc.fyre.neutron.prefix.Prefix;
 import cc.fyre.neutron.prefix.PrefixHandler;
 import cc.fyre.neutron.profile.ProfileHandler;
@@ -31,6 +32,7 @@ public class Neutron extends JavaPlugin {
 	private PrefixHandler prefixHandler;
 	private ProfileHandler profileHandler;
 	private ServerHandler serverHandler;
+	private NotificationHandler notificationHandler;
 
 	private boolean isTestServer = false;
 
@@ -44,6 +46,7 @@ public class Neutron extends JavaPlugin {
 
 		this.mongoHandler = new MongoHandler(this);
 
+		this.notificationHandler = new NotificationHandler();
 		this.serverHandler = new ServerHandler();
 		this.rankHandler = new RankHandler(this);
 		this.prefixHandler = new PrefixHandler(this);

@@ -4,11 +4,10 @@ import cc.fyre.neutron.Neutron;
 import cc.fyre.neutron.profile.attributes.api.Executable;
 import cc.fyre.neutron.profile.attributes.api.Pardonable;
 import cc.fyre.neutron.rank.Rank;
-import cc.fyre.neutron.util.FormatUtil;
 import cc.fyre.proton.Proton;
+import cc.fyre.proton.util.TimeUtils;
 import lombok.Data;
 import org.bson.Document;
-import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +116,7 @@ public class Grant implements Executable, Pardonable {
 			return "Never";
 		}
 
-		return ChatColor.YELLOW + FormatUtil.millisToRoundedTime((this.duration + this.executedAt) - System.currentTimeMillis(), true);
+		return TimeUtils.formatIntoDetailedString((int) (((this.duration + this.executedAt) - System.currentTimeMillis()) / 1000));
 	}
 
 }

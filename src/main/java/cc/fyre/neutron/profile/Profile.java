@@ -13,6 +13,9 @@ import cc.fyre.neutron.profile.attributes.punishment.impl.RemoveAblePunishment;
 import cc.fyre.neutron.profile.attributes.rollback.Rollback;
 import cc.fyre.neutron.profile.attributes.server.ServerProfile;
 import cc.fyre.neutron.profile.disguise.DisguiseProfile;
+import cc.fyre.neutron.profile.friend.FriendRequest;
+import cc.fyre.neutron.profile.stat.GlobalStatistic;
+import cc.fyre.neutron.profile.stat.StatType;
 import cc.fyre.neutron.rank.Rank;
 import cc.fyre.proton.util.qr.TotpUtil;
 import cc.fyre.proton.uuid.UUIDCache;
@@ -38,19 +41,22 @@ public class Profile {
 	private String name, ipAddress, authSecret;
 	private ServerProfile serverProfile;
 	private DisguiseProfile disguiseProfile;
-	
+
 	private ChatColor chatColor;
 	private Grant activeGrant;
 	private Prefix activePrefix;
 
-	private List<UUID> siblings;
+	private List<UUID> siblings, blocked, friends;
+	private List<FriendRequest> friendRequests;
 	private List<Note> notes;
 	private List<Grant> grants;
 	private List<Rollback> rollbacks;
 	private List<String> permissions;
 	private List<IPunishment> punishments;
 
-	 private ProfilePermissible permissible;
+	private List<GlobalStatistic> globalStatistics;
+
+	private ProfilePermissible permissible;
 
 	public Profile(UUID uuid, String name) {
 		this.uuid = uuid;
@@ -58,6 +64,7 @@ public class Profile {
 
 		this.ipAddress = null;
 
+		this.globalStatistics = new ArrayList<>();
 		this.serverProfile = new ServerProfile(true, System.currentTimeMillis(), System.currentTimeMillis(), Neutron.getInstance().getConfig().getString("server.name"));
 		this.disguiseProfile = null;
 
@@ -69,7 +76,10 @@ public class Profile {
 		this.activeGrant.getScopes().add("GLOBAL");
 		this.activePrefix = null;
 
+		this.friendRequests = new ArrayList<>();
+		this.friends = new ArrayList<>();
 		this.rollbacks = new ArrayList<>();
+		this.blocked = new ArrayList<>();
 		this.notes = new ArrayList<>();
 		this.grants = new ArrayList<>();
 		this.permissions = new ArrayList<>();
@@ -78,9 +88,11 @@ public class Profile {
 		this.authSecret = null;
 
 		if (Bukkit.getPluginManager().getPlugin("Pivot") == null) {
-
 			this.load();
 		}
+		this.globalStatistics.add(new GlobalStatistic(StatType.HCF));
+		this.globalStatistics.add(new GlobalStatistic(StatType.PRACTICE));
+		this.globalStatistics.add(new GlobalStatistic(StatType.KITS));
 	}
 
 	public Profile(Document document) {
@@ -254,6 +266,28 @@ public class Profile {
 			return false;
 		}
 
+	}
+
+	public FriendRequest getFriendRequestFromSender(UUID sender) {
+		for (FriendRequest request : this.friendRequests) {
+			if (request.getSender().toString().equals(sender.toString())) {
+				if (!request.isExpired()) {
+					return request;
+				}
+			}
+		}
+		return null;
+	}
+
+	public FriendRequest getFriendRequestFromTarget(UUID target) {
+		for (FriendRequest request : this.friendRequests) {
+			if (request.getTarget().toString().equals(target.toString())) {
+				if (!request.isExpired()) {
+					return request;
+				}
+			}
+		}
+		return null;
 	}
 
 }

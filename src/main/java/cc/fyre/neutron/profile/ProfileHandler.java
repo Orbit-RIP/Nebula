@@ -18,8 +18,14 @@ import cc.fyre.neutron.profile.attributes.rollback.Rollback;
 import cc.fyre.neutron.profile.attributes.server.ServerProfile;
 import cc.fyre.neutron.profile.disguise.DisguiseProfile;
 import cc.fyre.neutron.profile.event.GrantExpireEvent;
+import cc.fyre.neutron.profile.friend.FriendRequest;
+import cc.fyre.neutron.profile.friend.packet.FriendRequestSendPacket;
 import cc.fyre.neutron.profile.packet.PermissionAddPacket;
 import cc.fyre.neutron.profile.packet.PermissionRemovePacket;
+import cc.fyre.neutron.profile.stat.GlobalStatistic;
+import cc.fyre.neutron.util.CC;
+import cc.fyre.neutron.util.EncryptionHandler;
+import cc.fyre.neutron.util.fanciful.FancyMessage;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.pidgin.packet.handler.IncomingPacketHandler;
 import cc.fyre.proton.pidgin.packet.listener.PacketListener;
@@ -31,6 +37,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import lombok.Getter;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -123,6 +130,19 @@ public class ProfileHandler implements Listener, PacketListener {
 			profile.setIpAddress(document.getString("ipAddress"));
 		}
 
+		for (String key : document.keySet()) {
+			for (GlobalStatistic statistic : profile.getGlobalStatistics()) {
+				if (key.contains(statistic.getStatType().name() + "-")) {
+					statistic.setKills(document.getInteger(statistic.getStatType().name() + "-kills"));
+					statistic.setDeaths(document.getInteger(statistic.getStatType().name() + "-deaths"));
+					statistic.setKillStreak(document.getInteger(statistic.getStatType().name() + "-killStreak"));
+					statistic.setHighestKillStreak(document.getInteger(statistic.getStatType().name() + "-highestKillStreak"));
+					statistic.setSeasonsPlayed(document.getInteger(statistic.getStatType().name() + "-seasonsPlayed"));
+					statistic.getPastTeams().addAll(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString(statistic.getStatType().name() + "-pastTeams"), ArrayList.class));
+				}
+			}
+		}
+
 		if (document.containsKey("serverProfile")) {
 			profile.setServerProfile(new ServerProfile(document.get("serverProfile", Document.class)));
 		}
@@ -137,6 +157,14 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		if (document.containsKey("siblings")) {
 			profile.setSiblings(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("siblings"), ArrayList.class).stream().map(UUID::fromString).collect(Collectors.toList()));
+		}
+
+		if (document.containsKey("blocked")) {
+			profile.setBlocked(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("blocked"), ArrayList.class).stream().map(UUID::fromString).collect(Collectors.toList()));
+		}
+
+		if (document.containsKey("friends")) {
+			profile.setFriends(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("friends"), ArrayList.class).stream().map(UUID::fromString).collect(Collectors.toList()));
 		}
 
 		if (document.containsKey("notes")) {
@@ -184,6 +212,10 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		}
 
+		if (document.containsKey("friendRequests")) {
+			profile.setFriendRequests(Proton.PLAIN_GSON.<List<FriendRequest>>fromJson(document.getString("friendRequests"), ArrayList.class));
+		}
+
 		if (document.containsKey("permissions")) {
 			profile.setPermissions(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("permissions"), ArrayList.class));
 		}
@@ -222,11 +254,23 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		document.put("chatColor", profile.getChatColor().name());
 		document.put("siblings", Proton.PLAIN_GSON.toJson(profile.getSiblings().stream().map(UUID::toString).collect(Collectors.toList())));
+		document.put("blocked", Proton.PLAIN_GSON.toJson(profile.getBlocked().stream().map(UUID::toString).collect(Collectors.toList())));
+		document.put("friends", Proton.PLAIN_GSON.toJson(profile.getFriends().stream().map(UUID::toString).collect(Collectors.toList())));
+		document.put("friendRequests", Proton.PLAIN_GSON.toJson(profile.getFriendRequests()));
 
 		document.put("activeGrant", profile.getActiveGrant().getUuid().toString());
 
 		if (profile.getActivePrefix() != null) {
 			document.put("activePrefix", profile.getActivePrefix().getUuid().toString());
+		}
+
+		for (GlobalStatistic statistic : profile.getGlobalStatistics()) {
+			document.put(statistic.getStatType().name() + "kills", statistic.getKills());
+			document.put(statistic.getStatType().name() + "deaths", statistic.getDeaths());
+			document.put(statistic.getStatType().name() + "killStreak", statistic.getKillStreak());
+			document.put(statistic.getStatType().name() + "highestKillStreak", statistic.getHighestKillStreak());
+			document.put(statistic.getStatType().name() + "seasonsPlayed", statistic.getSeasonsPlayed());
+			document.put(statistic.getStatType().name() + "pastTeams", Proton.PLAIN_GSON.toJson(statistic.getPastTeams()));
 		}
 
 		document.put("notes", Proton.PLAIN_GSON.toJson(profile.getNotes().stream().map(note -> note.toDocument().toJson()).collect(Collectors.toList())));
@@ -349,7 +393,7 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		final Profile profile = new Profile(event.getUniqueId(), event.getName());
 
-		profile.setIpAddress(event.getAddress().getHostAddress());
+		profile.setIpAddress(EncryptionHandler.encryptUsingKey(event.getAddress().getHostAddress()));
 
 		RemoveAblePunishment punishment = null;
 
@@ -422,7 +466,7 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		profile.getServerProfile().setOnline(true);
 		profile.getServerProfile().setLastLogin(System.currentTimeMillis());
-		profile.getServerProfile().setLastServer(Neutron.getInstance().getConfig().getString("server"));
+		profile.getServerProfile().setLastServer(Neutron.getInstance().getConfig().getString("server.name"));
 
 		profile.save();
 
@@ -474,7 +518,7 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		profile.getServerProfile().setOnline(false);
 		profile.getServerProfile().setLastLogin(System.currentTimeMillis());
-		profile.getServerProfile().setLastServer(Neutron.getInstance().getConfig().getString("server"));
+		profile.getServerProfile().setLastServer(Neutron.getInstance().getConfig().getString("server.name"));
 
 		profile.save();
 
@@ -641,6 +685,32 @@ public class ProfileHandler implements Listener, PacketListener {
 		final Note note = new Note(packet.document());
 
 		profile.getNotes().add(note);
+	}
+
+	@IncomingPacketHandler
+	public void onFriendRequestSend(FriendRequestSendPacket packet) {
+
+		Player target = Bukkit.getPlayer(packet.target());
+		String name = Proton.getInstance().getUuidCache().name(packet.sender());
+		if (target != null) {
+			target.sendMessage(CC.translate("&7&m---------------------"));
+			FancyMessage message = new FancyMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + name + " &fhas just sent you a friend request. You have &65 minutes&f to accept it."));
+			message.tooltip(CC.translate("&7Click here to accept the friend request."));
+			message.command("/friend accept " + name);
+			message.send(target);
+			target.sendMessage(CC.translate("&7&m---------------------"));
+
+			Profile profile = getCache().get(target.getUniqueId());
+
+			FriendRequest request = new FriendRequest();
+			request.setSender(packet.sender());
+			request.setTarget(packet.target());
+			request.setSentAt(System.currentTimeMillis());
+
+			profile.getFriendRequests().add(request);
+			profile.save();
+		}
+
 	}
 
 }

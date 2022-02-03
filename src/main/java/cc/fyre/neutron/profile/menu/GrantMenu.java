@@ -38,8 +38,9 @@ public class GrantMenu extends PaginatedMenu {
 		Map<Integer, Button> buttons = new HashMap<>();
 
 		int i = -1;
-		for (Map.Entry<UUID, Rank> entry : Neutron.getInstance().getRankHandler().getCache().entrySet()) {
-			buttons.put(++i, new GrantButton(this.target, entry.getValue()));
+
+		for (Rank rank : Neutron.getInstance().getRankHandler().getSortedValueCache()) {
+			buttons.put(++i, new GrantButton(this.target, rank));
 		}
 
 		return buttons;

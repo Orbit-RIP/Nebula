@@ -11,9 +11,9 @@ public class NebulaConstants {
 
     public static final String MONITOR_PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Monitor" + ChatColor.DARK_GRAY + "]";
 
-    public static final String STAFF_PERMISSION = "neutron.staff";
-    public static final String ADMIN_PERMISSION = "neutron.admin";
-    public static final String MANAGER_PERMISSION = "neutron.manager";
+    public static final String STAFF_PERMISSION = "nebula.staff";
+    public static final String ADMIN_PERMISSION = "nebula.admin";
+    public static final String MANAGER_PERMISSION = "nebula.manager";
 
     public static final String SILENT_PREFIX = ChatColor.GRAY + "[Unlisted]";
     public static final String SB_BAR = ChatColor.STRIKETHROUGH.toString() + StringUtils.repeat("-",20);

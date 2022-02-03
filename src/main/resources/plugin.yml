@@ -1,5 +1,5 @@
-name: Meteor
-main: cc.fyre.neutron.Neutron
-author: Alfie
+name: Nebula
+main: rip.orbit.nebula.Nebula
+author: Alfie,Lbuddyb0y, Branched
 version: 1.0-SNAPSHOT
 depend: [Proton]

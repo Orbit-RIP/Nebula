@@ -1,0 +1,36 @@
+package rip.orbit.nebula.command.rank.metadata;
+
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.rank.Rank;
+import cc.fyre.proton.command.Command;
+import cc.fyre.proton.command.param.Parameter;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+
+/**
+ * @author xanderume@gmail (JavaProject)
+ */
+public class RankMetaDataRemoveCommand {
+
+    @Command(
+            names = {"rank metadata remove"},
+            permission = "neutron.command.rank.metadata.remove"
+    )
+    public static void execute(CommandSender sender,@Parameter(name = "rank") Rank rank,@Parameter(name = "metadata")String metaData) {
+        if (Nebula.getInstance().isTestServer() && !sender.isOp()) {
+            sender.sendMessage(ChatColor.RED + "You can't do this as the server is in developer mode!");
+            return;
+        }
+
+        if (!rank.hasMetaData(metaData)) {
+            sender.sendMessage(rank.getFancyName() + ChatColor.RED + " does not have " + ChatColor.WHITE + metaData + ChatColor.RED + " metadata.");
+            return;
+        }
+
+        rank.getMetaData().remove(metaData);
+        rank.save();
+
+        sender.sendMessage(ChatColor.GOLD + "Removed metadata " + ChatColor.WHITE + metaData + ChatColor.GOLD + " from " + rank.getFancyName() + ChatColor.GOLD + ".");
+    }
+
+}

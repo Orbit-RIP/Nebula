@@ -36,258 +36,256 @@ import java.util.stream.Collectors;
 @Data
 public class Profile {
 
-	private final UUID uuid;
-
-	private String name, ipAddress, authSecret;
-	private ServerProfile serverProfile;
-	private DisguiseProfile disguiseProfile;
-
-	private ChatColor chatColor;
-	private Grant activeGrant;
-	private Prefix activePrefix;
-
-	private List<UUID> siblings, blocked, friends;
-	private List<FriendRequest> friendRequests;
-	private List<Note> notes;
-	private List<Grant> grants;
-	private List<Rollback> rollbacks;
-	private List<String> permissions;
-	private List<IPunishment> punishments;
-
-	private List<GlobalStatistic> globalStatistics;
-
-	private ProfilePermissible permissible;
-
-	public Profile(UUID uuid, String name) {
-		this.uuid = uuid;
-		this.name = name;
+    private final UUID uuid;
+
+    private String name, ipAddress, authSecret;
+    private ServerProfile serverProfile;
+    private DisguiseProfile disguiseProfile;
+
+    private ChatColor chatColor;
+    private Grant activeGrant;
+    private Prefix activePrefix;
+
+    private List<UUID> siblings, blocked, friends;
+    private List<FriendRequest> friendRequests;
+    private List<Note> notes;
+    private List<Grant> grants;
+    private List<Rollback> rollbacks;
+    private List<String> permissions;
+    private List<IPunishment> punishments;
+
+    private List<GlobalStatistic> globalStatistics;
 
-		this.ipAddress = null;
+    private ProfilePermissible permissible;
 
-		this.globalStatistics = new ArrayList<>();
-		this.serverProfile = new ServerProfile(true, System.currentTimeMillis(), System.currentTimeMillis(), Nebula.getInstance().getConfig().getString("server.name"));
-		this.disguiseProfile = null;
+    public Profile(UUID uuid, String name) {
+        this.uuid = uuid;
+        this.name = name;
 
-		this.chatColor = ChatColor.WHITE;
+        this.ipAddress = null;
 
-		this.siblings = new ArrayList<>();
+        this.globalStatistics = new ArrayList<>();
+        this.serverProfile = new ServerProfile(true, System.currentTimeMillis(), System.currentTimeMillis(), Nebula.getInstance().getConfig().getString("server.name"));
+        this.disguiseProfile = null;
 
-		this.activeGrant = new Grant(Nebula.getInstance().getRankHandler().getDefaultRank(), UUIDCache.CONSOLE_UUID, (long) Integer.MAX_VALUE, "Default Grant");
-		this.activeGrant.getScopes().add("GLOBAL");
-		this.activePrefix = null;
+        this.chatColor = ChatColor.WHITE;
 
-		this.friendRequests = new ArrayList<>();
-		this.friends = new ArrayList<>();
-		this.rollbacks = new ArrayList<>();
-		this.blocked = new ArrayList<>();
-		this.notes = new ArrayList<>();
-		this.grants = new ArrayList<>();
-		this.permissions = new ArrayList<>();
-		this.punishments = new ArrayList<>();
+        this.siblings = new ArrayList<>();
 
-		this.authSecret = null;
+        this.activeGrant = new Grant(Nebula.getInstance().getRankHandler().getDefaultRank(), UUIDCache.CONSOLE_UUID, (long) Integer.MAX_VALUE, "Default Grant");
+        this.activeGrant.getScopes().add("GLOBAL");
+        this.activePrefix = null;
 
-		if (Bukkit.getPluginManager().getPlugin("Pivot") == null) {
-			this.load();
-		}
-		this.globalStatistics.add(new GlobalStatistic(StatType.HCF));
-		this.globalStatistics.add(new GlobalStatistic(StatType.PRACTICE));
-		this.globalStatistics.add(new GlobalStatistic(StatType.KITS));
-	}
+        this.friendRequests = new ArrayList<>();
+        this.friends = new ArrayList<>();
+        this.rollbacks = new ArrayList<>();
+        this.blocked = new ArrayList<>();
+        this.notes = new ArrayList<>();
+        this.grants = new ArrayList<>();
+        this.permissions = new ArrayList<>();
+        this.punishments = new ArrayList<>();
 
-	public Profile(Document document) {
-		this.uuid = UUID.fromString(document.getString("uuid"));
-		this.load(document);
-	}
+        this.authSecret = null;
+        this.load();
 
-	public void load() {
-		this.getHandler().load(this);
-	}
+        this.globalStatistics.add(new GlobalStatistic(StatType.HCF));
+        this.globalStatistics.add(new GlobalStatistic(StatType.PRACTICE));
+        this.globalStatistics.add(new GlobalStatistic(StatType.KITS));
+    }
 
-	public void load(Document document) {
-		this.getHandler().load(this, document);
-	}
+    public Profile(Document document) {
+        this.uuid = UUID.fromString(document.getString("uuid"));
+        this.load(document);
+    }
 
-	public void save() {
-		this.getHandler().save(this);
-	}
+    public void load() {
+        this.getHandler().load(this);
+    }
 
-	public List<Document> findAlts() {
-		return this.getHandler().findAlts(this);
-	}
+    public void load(Document document) {
+        this.getHandler().load(this, document);
+    }
 
-	public List<Document> findAltsAsync() {
-		return this.getHandler().findAltsAsync(this).join();
-	}
+    public void save() {
+        this.getHandler().save(this);
+    }
 
-	public Document findDocument() {
-		return this.getHandler().getCollection().find(Filters.eq("uuid", this.uuid.toString())).first();
-	}
+    public List<Document> findAlts() {
+        return this.getHandler().findAlts(this);
+    }
 
-	public ProfileHandler getHandler() {
-		return Nebula.getInstance().getProfileHandler();
-	}
+    public List<Document> findAltsAsync() {
+        return this.getHandler().findAltsAsync(this).join();
+    }
 
-	public Note getNote(UUID uuid) {
-		return this.notes.stream().filter(note -> note.getUuid().equals(uuid)).findAny().orElse(null);
-	}
+    public Document findDocument() {
+        return this.getHandler().getCollection().find(Filters.eq("uuid", this.uuid.toString())).first();
+    }
 
-	public Grant getGrant(UUID uuid) {
-		return this.grants.stream().filter(grant -> grant.getUuid().equals(uuid)).findAny().orElse(null);
-	}
+    public ProfileHandler getHandler() {
+        return Nebula.getInstance().getProfileHandler();
+    }
 
-	public List<Grant> getActiveGrants() {
-		return this.grants.stream().filter(Grant::isActive).collect(Collectors.toList());
-	}
+    public Note getNote(UUID uuid) {
+        return this.notes.stream().filter(note -> note.getUuid().equals(uuid)).findAny().orElse(null);
+    }
 
-	public Grant getActiveGrant(Rank rank) {
-		return this.getActiveGrants().stream().filter(grant -> grant.getRank().getUuid() == rank.getUuid()).sorted(new GrantWeightComparator().thenComparing(new GrantDateComparator())).findFirst().orElse(null);
-	}
+    public Grant getGrant(UUID uuid) {
+        return this.grants.stream().filter(grant -> grant.getUuid().equals(uuid)).findAny().orElse(null);
+    }
 
-	public IPunishment getPunishment(UUID uuid) {
-		return this.punishments.stream().filter(iPunishment -> iPunishment.getUuid().equals(uuid)).findAny().orElse(null);
-	}
+    public List<Grant> getActiveGrants() {
+        return this.grants.stream().filter(Grant::isActive).collect(Collectors.toList());
+    }
 
-	public List<RemoveAblePunishment> getActivePunishments() {
-		return this.punishments.stream().filter(iPunishment -> iPunishment instanceof RemoveAblePunishment).map(RemoveAblePunishment.class::cast).filter(removeAblePunishment -> removeAblePunishment.isActive()).collect(Collectors.toList());
-	}
+    public Grant getActiveGrant(Rank rank) {
+        return this.getActiveGrants().stream().filter(grant -> grant.getRank().getUuid() == rank.getUuid()).sorted(new GrantWeightComparator().thenComparing(new GrantDateComparator())).findFirst().orElse(null);
+    }
 
-	public RemoveAblePunishment getActivePunishment(RemoveAblePunishment.Type type) {
-		return this.getActivePunishments().stream().filter(removeAblePunishment -> removeAblePunishment.getType() == type).sorted(new PunishmentDateComparator()).findFirst().orElse(null);
-	}
+    public IPunishment getPunishment(UUID uuid) {
+        return this.punishments.stream().filter(iPunishment -> iPunishment.getUuid().equals(uuid)).findAny().orElse(null);
+    }
 
-	public String getFancyName() {
+    public List<RemoveAblePunishment> getActivePunishments() {
+        return this.punishments.stream().filter(iPunishment -> iPunishment instanceof RemoveAblePunishment).map(RemoveAblePunishment.class::cast).filter(removeAblePunishment -> removeAblePunishment.isActive()).collect(Collectors.toList());
+    }
 
-		final Player player = this.getPlayer();
+    public RemoveAblePunishment getActivePunishment(RemoveAblePunishment.Type type) {
+        return this.getActivePunishments().stream().filter(removeAblePunishment -> removeAblePunishment.getType() == type).sorted(new PunishmentDateComparator()).findFirst().orElse(null);
+    }
 
-		if (player != null) {
-			return player.getDisplayName();
-		}
+    public String getFancyName() {
 
-		return this.getActiveRank().getColor().toString() + (this.getActiveRank().getSecondColor() != null ? this.getActiveRank().getSecondColor() : "") + this.name;
-	}
+        final Player player = this.getPlayer();
 
-	public Player getPlayer() {
-		return Nebula.getInstance().getServer().getPlayer(this.uuid);
-	}
+        if (player != null) {
+            return player.getDisplayName();
+        }
 
-	public boolean isSibling(Profile profile) {
-		return this.siblings.contains(profile.getUuid()) || profile.getSiblings().contains(this.uuid);
-	}
+        return this.getActiveRank().getColor().toString() + (this.getActiveRank().getSecondColor() != null ? this.getActiveRank().getSecondColor() : "") + this.name;
+    }
 
-	public List<String> getEffectivePermissions() {
+    public Player getPlayer() {
+        return Nebula.getInstance().getServer().getPlayer(this.uuid);
+    }
 
-		final List<String> toReturn = new ArrayList<>(this.permissions);
+    public boolean isSibling(Profile profile) {
+        return this.siblings.contains(profile.getUuid()) || profile.getSiblings().contains(this.uuid);
+    }
 
-		this.getActiveGrants().stream().map(Grant::getRank).map(Rank::getEffectivePermissions).forEach(toReturn::addAll);
+    public List<String> getEffectivePermissions() {
 
-		return toReturn;
-	}
+        final List<String> toReturn = new ArrayList<>(this.permissions);
 
-	public void recalculateGrants() {
+        this.getActiveGrants().stream().map(Grant::getRank).map(Rank::getEffectivePermissions).forEach(toReturn::addAll);
 
-		final List<Grant> grants = this.getActiveGrants().stream()
-				.sorted(new GrantWeightComparator().reversed().thenComparing(new GrantDateComparator().reversed())).collect(Collectors.toList());
+        return toReturn;
+    }
 
-		for (Grant grant : grants) {
-			if (grant.getScopes().contains("GLOBAL") || grant.getScopes().contains(Nebula.getInstance().getNetwork().getName())) {
-				this.setActiveGrant(grant);
-				break;
-			}
-		}
+    public void recalculateGrants() {
 
-		this.refreshDisplayName(this.getPlayer());
-	}
+        final List<Grant> grants = this.getActiveGrants().stream()
+                .sorted(new GrantWeightComparator().reversed().thenComparing(new GrantDateComparator().reversed())).collect(Collectors.toList());
 
-	public void setup(PlayerJoinEvent event) {
+        for (Grant grant : grants) {
+            if (grant.getScopes().contains("GLOBAL") || grant.getScopes().contains(Nebula.getInstance().getNetwork().getName())) {
+                this.setActiveGrant(grant);
+                break;
+            }
+        }
 
-		final Player player = event.getPlayer();
+        this.refreshDisplayName(this.getPlayer());
+    }
 
-		this.permissible = new ProfilePermissible(player);
+    public void setup(PlayerJoinEvent event) {
 
-		this.permissible.recalculatePermissions();
+        final Player player = event.getPlayer();
 
-		this.refreshDisplayName(player);
-	}
+        this.permissible = new ProfilePermissible(player);
 
-	public Rank getActiveRank() {
-		return this.getActiveGrant().getRank();
-	}
+        this.permissible.recalculatePermissions();
 
-	public Grant getActiveGrant() {
-		return this.disguiseProfile == null ? this.activeGrant : new Grant(this.disguiseProfile.getRank(), UUIDCache.CONSOLE_UUID, (long) Integer.MAX_VALUE, "Disguised");
-	}
+        this.refreshDisplayName(player);
+    }
 
-	public void refreshDisplayName() {
-		this.refreshDisplayName(this.getPlayer());
-	}
+    public Rank getActiveRank() {
+        return this.getActiveGrant().getRank();
+    }
 
-	public void refreshDisplayName(Player player) {
+    public Grant getActiveGrant() {
+        return this.disguiseProfile == null ? this.activeGrant : new Grant(this.disguiseProfile.getRank(), UUIDCache.CONSOLE_UUID, (long) Integer.MAX_VALUE, "Disguised");
+    }
 
-		if (player == null) {
-			return;
-		}
+    public void refreshDisplayName() {
+        this.refreshDisplayName(this.getPlayer());
+    }
 
-		String displayName;
+    public void refreshDisplayName(Player player) {
 
-		if (this.activeGrant.getRank().getSecondColor() != null) {
-			displayName = this.getActiveRank().getColor().toString() + this.activeGrant.getRank().getSecondColor() + player.getName();
-		} else {
-			displayName = this.getActiveRank().getColor() + player.getName();
-		}
+        if (player == null) {
+            return;
+        }
 
-		if (Nebula.getInstance().getConfig().getBoolean("fancyName.displayName")) {
+        String displayName;
 
-			if (player.getName().length() <= 14) {
-				player.setDisplayName(displayName);
-			}
+        if (this.activeGrant.getRank().getSecondColor() != null) {
+            displayName = this.getActiveRank().getColor().toString() + this.activeGrant.getRank().getSecondColor() + player.getName();
+        } else {
+            displayName = this.getActiveRank().getColor() + player.getName();
+        }
 
-		}
+        if (Nebula.getInstance().getConfig().getBoolean("fancyName.displayName")) {
 
-		if (Nebula.getInstance().getConfig().getBoolean("fancyName.tabListName")) {
+            if (player.getName().length() <= 14) {
+                player.setDisplayName(displayName);
+            }
 
-			if (player.getName().length() <= 14) {
-				player.setPlayerListName(displayName);
-			}
+        }
 
-		}
+        if (Nebula.getInstance().getConfig().getBoolean("fancyName.tabListName")) {
 
-	}
+            if (player.getName().length() <= 14) {
+                player.setPlayerListName(displayName);
+            }
 
-	public boolean verifyCode(int code) {
+        }
 
-		if (this.authSecret == null) {
-			return false;
-		}
+    }
 
-		try {
-			return TotpUtil.validateCurrentNumber(this.authSecret, code, 250);
-		} catch (GeneralSecurityException ex) {
-			return false;
-		}
+    public boolean verifyCode(int code) {
 
-	}
+        if (this.authSecret == null) {
+            return false;
+        }
 
-	public FriendRequest getFriendRequestFromSender(UUID sender) {
-		for (FriendRequest request : this.friendRequests) {
-			if (request.getSender().toString().equals(sender.toString())) {
-				if (!request.isExpired()) {
-					return request;
-				}
-			}
-		}
-		return null;
-	}
+        try {
+            return TotpUtil.validateCurrentNumber(this.authSecret, code, 250);
+        } catch (GeneralSecurityException ex) {
+            return false;
+        }
 
-	public FriendRequest getFriendRequestFromTarget(UUID target) {
-		for (FriendRequest request : this.friendRequests) {
-			if (request.getTarget().toString().equals(target.toString())) {
-				if (!request.isExpired()) {
-					return request;
-				}
-			}
-		}
-		return null;
-	}
+    }
+
+    public FriendRequest getFriendRequestFromSender(UUID sender) {
+        for (FriendRequest request : this.friendRequests) {
+            if (request.getSender().toString().equals(sender.toString())) {
+                if (!request.isExpired()) {
+                    return request;
+                }
+            }
+        }
+        return null;
+    }
+
+    public FriendRequest getFriendRequestFromTarget(UUID target) {
+        for (FriendRequest request : this.friendRequests) {
+            if (request.getTarget().toString().equals(target.toString())) {
+                if (!request.isExpired()) {
+                    return request;
+                }
+            }
+        }
+        return null;
+    }
 
 }

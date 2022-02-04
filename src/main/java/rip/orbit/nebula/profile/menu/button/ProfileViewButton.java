@@ -43,8 +43,8 @@ public class ProfileViewButton extends Button {
 		lore.add("&6&l┃ &fRank: &r" + profile.getActiveRank().getFancyName());
 		if (!profile.getActiveGrant().isPermanent()) {
 			lore.add("  &6&l┃ &fDuration&f: &6" + profile.getActiveGrant().getRemainingString());
+			lore.add("&7&m-----------------");
 		}
-		lore.add("&7&m-----------------");
 		if (profile.getServerProfile().isOnline()) {
 			lore.add("&6&l┃ &fCurrent Server: &6" + profile.getServerProfile().getLastServer());
 			lore.add("&6&l┃ &fOnline Since: &6" + profile.getServerProfile().getLastSeenString());

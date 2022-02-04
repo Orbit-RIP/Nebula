@@ -14,7 +14,7 @@ public class HistoryCommand {
 
     @Command(
             names = {"history","c","check"},
-            permission = "neutron.command.history"
+            permission = "orbit.trialmod"
     )
     public static void execute(Player player,@Parameter(name = "player")UUID uuid) {
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);

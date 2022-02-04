@@ -11,7 +11,7 @@ public class RankRenameCommand {
 
     @Command(
             names = {"rank setname"},
-            permission = "neutron.command.rank.setname"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "rank") Rank rank,@Parameter(name = "name")String name) {
         if (Nebula.getInstance().isTestServer() && !sender.isOp()) {

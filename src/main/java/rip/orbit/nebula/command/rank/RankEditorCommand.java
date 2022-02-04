@@ -11,7 +11,7 @@ public class RankEditorCommand {
 
     @Command(
             names = {"rank editor"},
-            permission = "neutron.command.rank.editor",
+            permission = "orbit.headstaff",
             hidden = true
     )
     public static void execute(Player player) {

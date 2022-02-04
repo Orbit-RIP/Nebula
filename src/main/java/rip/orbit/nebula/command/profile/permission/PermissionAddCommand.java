@@ -19,7 +19,7 @@ public class PermissionAddCommand {
 
     @Command(
             names = {"profile permission add","permission add","addindividualperm"},
-            permission = "neutron.command.permission.add"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid,@Parameter(name = "permission")String permission) {
 

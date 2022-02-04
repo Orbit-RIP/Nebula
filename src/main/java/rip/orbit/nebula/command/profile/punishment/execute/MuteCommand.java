@@ -19,9 +19,9 @@ public class MuteCommand {
 
     @Command(
             names = {"mute","tempmute"},
-            permission = "neutron.command.mute"
+            permission = "orbit.trialmod"
     )
-    public static void execute(CommandSender sender, @Parameter(name = "player") String name, @Parameter(name = "duration") DurationWrapper duration, @Parameter(name = "reason",defaultValue = "Misconduct",wildcard = true)String reason, @Flag(value = "p",description = "Execute public")boolean broadcast) {
+    public static void execute(CommandSender sender, @Parameter(name = "player") String name, @Parameter(name = "duration") DurationWrapper duration, @Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason, @Flag(value = "p",description = "Execute public")boolean broadcast) {
 
         final Player player = Nebula.getInstance().getServer().getPlayer(name);
 

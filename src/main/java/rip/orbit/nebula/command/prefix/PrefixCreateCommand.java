@@ -15,7 +15,7 @@ public class PrefixCreateCommand {
 
     @Command(
             names = {"prefix create"},
-            permission = "neutron.command.prefix.create"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "name")String name) {
 

@@ -13,7 +13,7 @@ public class SiblingRemoveCommand {
 
     @Command(
             names = {"sibling remove"},
-            permission = "neutron.command.sibling.remove"
+            permission = "orbit.admin"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "sibling")UUID sibling) {
 

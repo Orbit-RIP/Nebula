@@ -38,7 +38,6 @@ public class GrantMenu extends PaginatedMenu {
 		Map<Integer, Button> buttons = new HashMap<>();
 
 		int i = -1;
-
 		for (Rank rank : Nebula.getInstance().getRankHandler().getSortedValueCache()) {
 			buttons.put(++i, new GrantButton(this.target, rank));
 		}
@@ -60,9 +59,9 @@ public class GrantMenu extends PaginatedMenu {
 		@Override
 		public List<String> getDescription(Player var1) {
 			return Arrays.asList(
-					"",
-					ChatColor.WHITE + "Click to select the " + rank.getFancyName() + ChatColor.WHITE + " rank.",
-					""
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------",
+					ChatColor.YELLOW + "Click to select the " + rank.getFancyName() + ChatColor.YELLOW + " rank.",
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------"
 			);
 		}
 

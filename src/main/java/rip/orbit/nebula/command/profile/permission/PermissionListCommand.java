@@ -15,7 +15,7 @@ public class PermissionListCommand {
 
     @Command(
             names = {"profile permission list","permission list"},
-            permission = "neutron.command.permission.list"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Flag(value = {"e","effective"})boolean effective) {
 

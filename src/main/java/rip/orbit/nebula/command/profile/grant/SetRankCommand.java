@@ -26,8 +26,8 @@ import java.util.List;
 public class SetRankCommand {
 
 	@Command(
-			names = {"setrank"},
-			permission = "neutron.command.setrank"
+			names = {"setrank", "ogrant"},
+			permission = "orbit.headstaff"
 	)
 	public static void execute(CommandSender sender, @Parameter(name = "player") String name,
 							   @Parameter(name = "rank") Rank rank,
@@ -79,7 +79,7 @@ public class SetRankCommand {
 			Proton.getInstance().getPidginHandler().sendPacket(new GrantApplyPacket(profile.getUuid(), grant.toDocument()));
 		}
 
-		sender.sendMessage(ChatColor.GOLD + "You have granted " + profile.getFancyName() + " " + rank.getFancyName() + ChatColor.GOLD + " rank.");
+		sender.sendMessage(ChatColor.GREEN + "You have granted " + profile.getFancyName() + " " + rank.getFancyName() + ChatColor.GREEN + " rank.");
 	}
 
 }

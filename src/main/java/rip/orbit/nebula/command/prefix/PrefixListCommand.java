@@ -13,7 +13,7 @@ public class PrefixListCommand {
 
     @Command(
             names = {"prefix list"},
-            permission = "neutron.command.prefix.list"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender) {
 

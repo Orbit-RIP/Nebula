@@ -17,9 +17,9 @@ public class BlacklistCommand {
 
     @Command(
             names = {"blacklist"},
-            permission = "neutron.command.blacklist"
+            permission = "orbit.headstaff"
     )
-    public static void execute(CommandSender sender,@Parameter(name = "player") String name,@Parameter(name = "reason",defaultValue = "Cheating",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
+    public static void execute(CommandSender sender,@Parameter(name = "player") String name,@Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
 
         final Player player = Nebula.getInstance().getServer().getPlayer(name);
 

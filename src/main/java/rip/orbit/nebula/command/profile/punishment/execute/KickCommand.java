@@ -20,9 +20,9 @@ public class KickCommand {
 
     @Command(
             names = {"kick"},
-            permission = "neutron.command.kick"
+            permission = "orbit.trialmod"
     )
-    public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "reason",defaultValue = "Misconduct",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
+    public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);
 

@@ -14,7 +14,7 @@ public class SiblingAddCommand {
 
     @Command(
             names = {"sibling add"},
-            permission = "neutron.command.sibling.add"
+            permission = "orbit.admin"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid,@Parameter(name = "sibling")UUID sibling) {
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);

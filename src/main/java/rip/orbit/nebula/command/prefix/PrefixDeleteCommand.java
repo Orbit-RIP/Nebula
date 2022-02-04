@@ -18,7 +18,7 @@ public class PrefixDeleteCommand {
 
     @Command(
             names = {"prefix delete"},
-            permission = "neutron.command.prefix.delete"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix) {
         if (!(sender instanceof Player)) {

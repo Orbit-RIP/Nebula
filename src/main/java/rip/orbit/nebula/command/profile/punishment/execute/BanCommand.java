@@ -18,10 +18,10 @@ import org.bukkit.entity.Player;
 public class BanCommand {
 
     @Command(
-            names = {"ban","tempban"},
-            permission = "neutron.command.ban"
+            names = {"ban","tempban", "b", "tb"},
+            permission = "orbit.trialmod"
     )
-    public static void execute(CommandSender sender, @Parameter(name = "player") String name, @Parameter(name = "duration") DurationWrapper duration, @Parameter(name = "reason",defaultValue = "Cheating",wildcard = true)String reason, @Flag(value = "p",description = "Execute silent")boolean broadcast) {
+    public static void execute(CommandSender sender, @Parameter(name = "player") String name, @Parameter(name = "duration") DurationWrapper duration, @Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason, @Flag(value = "p",description = "Execute silent")boolean broadcast) {
 
         final Player player = Nebula.getInstance().getServer().getPlayer(name);
 

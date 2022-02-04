@@ -35,7 +35,7 @@ public class NoteAddCommand {
             Proton.getInstance().getPidginHandler().sendPacket(new NoteApplyPacket(profile.getUuid(),note.toDocument()));
         }
 
-        sender.sendMessage(ChatColor.GOLD + "Added a note to " + profile.getFancyName() + ChatColor.GOLD + "'s account.");
+        sender.sendMessage(ChatColor.GREEN + "Sucessfully added a note to " + profile.getFancyName() + ChatColor.GREEN + "'s account.");
     }
 
 }

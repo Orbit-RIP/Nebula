@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ServerCommand {
 
-	@Command(names = {"scopes delete"}, permission = "neutron.command.scopes.delete")
+	@Command(names = {"scopes delete"}, permission = "orbit.owner")
 	public static void execute(CommandSender sender, @Parameter(name = "name") String server) {
 
 		if (!Nebula.getInstance().getServerHandler().getServers().contains(server)) {

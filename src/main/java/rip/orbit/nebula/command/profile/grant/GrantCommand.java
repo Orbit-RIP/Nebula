@@ -12,7 +12,7 @@ public class GrantCommand {
 
 	@Command(
 			names = {"grant"},
-			permission = "neutron.command.grant"
+			permission = "orbit.headstaff"
 	)
 	public static void execute(Player sender, @Parameter(name = "player") String name) {
 

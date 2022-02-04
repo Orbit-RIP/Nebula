@@ -30,7 +30,7 @@ public class HistoryMenu extends PaginatedMenu {
 
     @Override
     public String getPrePaginatedTitle(Player player) {
-        return this.profile.getFancyName();
+        return this.profile.getName();
     }
 
     @Override

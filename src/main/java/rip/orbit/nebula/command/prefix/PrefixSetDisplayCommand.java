@@ -10,7 +10,7 @@ public class PrefixSetDisplayCommand {
 
     @Command(
             names = {"prefix setdisplay","prefix changedisplay","prefix modifydisplay"},
-            permission = "neutron.command.prefix.setdisplay"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix,@Parameter(name = "display",wildcard = true)String display) {
 

@@ -17,7 +17,7 @@ public class PermissionRemoveCommand {
 
     @Command(
             names = {"profile permission remove","permission remove"},
-            permission = "neutron.command.permission.remove"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "permission")String permission) {
 

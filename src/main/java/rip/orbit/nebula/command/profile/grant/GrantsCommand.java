@@ -13,7 +13,7 @@ public class GrantsCommand {
 
     @Command(
             names = {"grants"},
-            permission = "neutron.command.grants"
+            permission = "orbit.admin"
     )
     public static void execute(Player player,@Parameter(name = "player") UUID uuid) {
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);

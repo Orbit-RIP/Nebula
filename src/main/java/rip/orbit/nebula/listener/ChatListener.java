@@ -1,6 +1,7 @@
 package rip.orbit.nebula.listener;
 
 import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.NebulaConstants;
 import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.attributes.punishment.impl.RemoveAblePunishment;
 import lombok.Getter;
@@ -27,14 +28,15 @@ public class ChatListener implements Listener {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(event.getPlayer().getUniqueId());
 
-        event.setFormat(profile.getFancyName() + ChatColor.GRAY + ": " + ChatColor.WHITE + event.getMessage());
+        event.setFormat(NebulaConstants.formatChatDisplay(profile.getPlayer(), event.getMessage()));
 
         if (profile.getActivePunishment(RemoveAblePunishment.Type.MUTE) != null) {
 
             final RemoveAblePunishment punishment = profile.getActivePunishment(RemoveAblePunishment.Type.MUTE);
 
-            event.getPlayer().sendMessage(ChatColor.RED + "You are currently muted.");
+            event.getPlayer().sendMessage(ChatColor.RED + "You are currently muted and can not type in public chat.");
             event.getPlayer().sendMessage(ChatColor.RED + "Expires: " + ChatColor.YELLOW + punishment.getRemainingString());
+            event.getPlayer().sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "Purchase an unmute at donate.orbit.rip (/buy).");
 
             event.setCancelled(true);
 

@@ -11,7 +11,7 @@ public class PrefixRenameCommand {
 
     @Command(
             names = {"prefix rename","prefix setname","prefix changename","prefix modifyname"},
-            permission = "neutron.command.prefix.rename"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix,@Parameter(name = "name")String name) {
 

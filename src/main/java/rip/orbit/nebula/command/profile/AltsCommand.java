@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class AltsCommand {
 
     @Command(
-            names = {"alts","alternates"},
-            permission = "neutron.command.alts"
+            names = {"alts","alternates", "dupeip"},
+            permission = "orbit.seniormod"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid,@Flag(value = "g", description = "show gui")boolean gui) {
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);

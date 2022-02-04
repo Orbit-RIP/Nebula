@@ -11,7 +11,7 @@ public class RankPermissionRemoveCommand {
 
     @Command(
             names = {"rank permission remove"},
-            permission = "neutron.command.rank.permission.remove"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "rank") Rank rank,@Parameter(name = "permission")String permission) {
         if (Nebula.getInstance().isTestServer() && !sender.isOp()) {

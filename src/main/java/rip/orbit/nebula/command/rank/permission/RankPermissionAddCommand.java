@@ -21,7 +21,7 @@ public class RankPermissionAddCommand {
 
     @Command(
             names = {"rank permission add"},
-            permission = "neutron.command.rank.permission.add"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "rank") Rank rank,@Parameter(name = "permission")String permission) {
         if (Nebula.getInstance().isTestServer() && !sender.isOp()) {

@@ -19,7 +19,7 @@ public class SiblingListCommand {
 
     @Command(
             names = {"sibling list"},
-            permission = "neutron.command.sibling.list"
+            permission = "orbit.admin"
     )
     public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Flag(value = "g", description = "show gui")boolean gui) {
 

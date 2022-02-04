@@ -14,7 +14,7 @@ public class SeenCommand {
 
     @Command(
             names = {"seen","lastonline"},
-            permission = "neutron.command.seen"
+            permission = ""
     )
     public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid) {
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);

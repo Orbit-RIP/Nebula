@@ -29,7 +29,7 @@ public class NotificationCommands {
 		sender.sendMessage(ChatColor.GREEN + "Successfully created a notification. /notifications");
 	}
 
-	@Command(names = {"managenotifications", "managenotifs", "notification manage", "notifications manage"}, permission = "lcore.command.notification.manage")
+	@Command(names = {"managenotifications", "managenotifs", "notification manage", "notifications manage"}, permission = "orbit.headstaff")
 	public static void managenotifications(Player sender) {
 		new ManageNotificationsMenu().openMenu(sender);
 	}

@@ -23,6 +23,7 @@ import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import rip.orbit.nebula.util.CC;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class GrantsMenu extends PaginatedMenu {
 
     @Override
     public String getPrePaginatedTitle(Player player) {
-        return this.profile.getFancyName();
+        return this.profile.getName();
     }
 
     @Override
@@ -78,21 +79,21 @@ public class GrantsMenu extends PaginatedMenu {
                     }
                     if (!grant.isActive() && grant.hasExpired()) {
                         toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
-                        toReturn.add(ChatColor.RED + "This grant has expired!");
+                        toReturn.add(ChatColor.RED.toString() + ChatColor.BOLD + "This grant has expired!");
                         toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
                         return toReturn;
                     }
 
                     if (grant.isPardoned()) {
                         toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
-                        toReturn.add(ChatColor.YELLOW + "Pardoned By: " + grant.getPardonedByFancyName());
-                        toReturn.add(ChatColor.YELLOW + "Pardoned At: " + ChatColor.RED + TimeUtils.formatIntoCalendarString(new Date(grant.getPardonedAt())));
-                        toReturn.add(ChatColor.YELLOW + "Pardoned Reason: " + ChatColor.RED + grant.getPardonedReason());
+                        toReturn.add(ChatColor.YELLOW + "Removed By: " + grant.getPardonedByFancyName());
+                        toReturn.add(ChatColor.YELLOW + "Removed On: " + ChatColor.RED + TimeUtils.formatIntoCalendarString(new Date(grant.getPardonedAt())));
+                        toReturn.add(ChatColor.YELLOW + "Reason For Removal: " + ChatColor.RED + grant.getPardonedReason());
                     } else {
 
                         if (player.hasPermission(NebulaConstants.MANAGER_PERMISSION) && !grant.getRankUuid().equals(Nebula.getInstance().getRankHandler().getDefaultRank().getUuid())) {
-                            toReturn.add("");
-                            toReturn.add(ChatColor.WHITE + "Click to remove grant.");
+                            toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
+                            toReturn.add(ChatColor.RED + "" + ChatColor.BOLD +"Click to remove this grant.");
                         }
 
                     }
@@ -153,7 +154,7 @@ public class GrantsMenu extends PaginatedMenu {
 
         @Override
         public String getPromptText(ConversationContext conversationContext) {
-            return ChatColor.RED + "Please provide a reason to remove this grant.";
+            return ChatColor.YELLOW + "Please provide a reason for this grant to be added, or type" + ChatColor.RED + "cancel" + ChatColor.YELLOW + "to cancel";
         }
 
         @Override
@@ -164,7 +165,7 @@ public class GrantsMenu extends PaginatedMenu {
             System.out.println(sender.getName());
 
             if (input.equalsIgnoreCase("cancel")) {
-                sender.sendRawMessage(ChatColor.RED + "Cancelled removing " + this.grant.getRank().getFancyName() + ChatColor.GOLD + " grant from " + this.profile.getFancyName() + ChatColor.GOLD + ".");
+                sender.sendRawMessage(ChatColor.RED + "Granting cancelled");
                 return END_OF_CONVERSATION;
             }
 
@@ -179,7 +180,7 @@ public class GrantsMenu extends PaginatedMenu {
                 Proton.getInstance().getPidginHandler().sendPacket(new GrantRemovePacket(this.profile.getUuid(),this.grant.toDocument()));
             }
 
-            sender.sendRawMessage(ChatColor.GREEN + "Removed " + this.grant.getRank().getFancyName() + ChatColor.GOLD + " grant from " + this.profile.getFancyName() + ChatColor.GOLD + ".");
+            sender.sendRawMessage(ChatColor.GREEN + "Removed " + this.grant.getRank().getFancyName() + ChatColor.GREEN + " grant from " + this.profile.getFancyName() + ChatColor.GREEN + ".");
             return Prompt.END_OF_CONVERSATION;
         }
     }

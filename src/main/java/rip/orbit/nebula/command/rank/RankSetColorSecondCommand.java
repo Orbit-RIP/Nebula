@@ -14,7 +14,7 @@ public class RankSetColorSecondCommand {
 
     @Command(
             names = {"rank setsecondcolor"},
-            permission = "neutron.command.rank.setcolor"
+            permission = "orbit.headstaff"
     )
     public static void execute(CommandSender sender,@Parameter(name = "rank") Rank rank,@Parameter(name = "color") ChatColor color) {
         if (Nebula.getInstance().isTestServer() && !sender.isOp()) {

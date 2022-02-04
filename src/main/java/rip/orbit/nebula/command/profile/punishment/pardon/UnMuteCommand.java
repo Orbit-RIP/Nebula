@@ -19,9 +19,9 @@ public class UnMuteCommand {
 
     @Command(
             names = {"unmute"},
-            permission = "neutron.command.unmute"
+            permission = "orbit.mod+"
     )
-    public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "reason",defaultValue = "Misconduct",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
+    public static void execute(CommandSender sender,@Parameter(name = "player") UUID uuid,@Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason,@Flag(value = "p",description = "Execute public")boolean broadcast) {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);
 

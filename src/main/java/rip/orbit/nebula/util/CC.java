@@ -43,7 +43,7 @@ public class CC {
 	public static final String SB_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "----------------------";
 
 	public static String translate(String string) {
-		return ChatColor.translateAlternateColorCodes('&', string.replaceAll("&g", "&x&0&6&9&2&f&f"));
+		return ChatColor.translateAlternateColorCodes('&', string);
 	}
 
 	public static List<String> translate(String... format) {

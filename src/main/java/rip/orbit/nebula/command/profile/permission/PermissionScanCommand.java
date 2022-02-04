@@ -14,7 +14,7 @@ public class PermissionScanCommand {
     @Command(
             names = {"profiles scan","profiles scan"},
             async = true,
-            permission = "neutron.command.permission.scan"
+            permission = "orbit.owner"
     )
     public static void execute(CommandSender sender, @Parameter(name = "permission") String permission, @Flag(value = {"e","effective"})boolean effective) {
 

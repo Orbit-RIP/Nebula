@@ -18,9 +18,9 @@ public class UnbanCommand {
 
     @Command(
             names = {"unban","pardon"},
-            permission = "neutron.command.unban"
+            permission = "orbit.mod+"
     )
-    public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid,@Parameter(name = "reason",defaultValue = "Misconduct",wildcard = true)String reason,@Flag(value = "p",description = "Pardon public")boolean broadcast) {
+    public static void execute(CommandSender sender,@Parameter(name = "player")UUID uuid,@Parameter(name = "reason",defaultValue = "No reason specified",wildcard = true)String reason,@Flag(value = "p",description = "Pardon public")boolean broadcast) {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid,true);
 

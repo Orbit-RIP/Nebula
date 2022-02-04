@@ -25,6 +25,7 @@ import rip.orbit.nebula.profile.packet.PermissionRemovePacket;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
 import rip.orbit.nebula.util.CC;
 import rip.orbit.nebula.util.EncryptionHandler;
+import rip.orbit.nebula.util.FormatUtil;
 import rip.orbit.nebula.util.fanciful.FancyMessage;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.pidgin.packet.handler.IncomingPacketHandler;
@@ -410,8 +411,8 @@ public class ProfileHandler implements Listener, PacketListener {
 			} else {
 				event.disallow(
 						AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
-						ChatColor.RED.toString() + "Your account is " + punishment.getType().getExecutedContext() + " from the " + Nebula.getInstance().getNetwork().getNetworkName() + " Network"
-								+ (punishment.isPermanent() ? "" : "\n\n" + ChatColor.RED + "Expires: " + ChatColor.YELLOW + punishment.getRemainingString())
+						ChatColor.RED.toString() + "Your account is " + punishment.getType().getExecutedContext() + " from the Orbit Network "
+								+ (punishment.isPermanent() ? "\nThis type of punishment does not expire" + ChatColor.GRAY.toString() + CC.ITALIC + "\nYou can appeal this at http://discord.orbit.rip": "\n\n" + ChatColor.RED + "This punishment expires in: " + ChatColor.YELLOW + punishment.getRemainingString())
 				);
 			}
 			return;

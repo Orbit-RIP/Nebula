@@ -156,8 +156,8 @@ public class RemoveAblePunishment implements IPunishment, Pardonable {
             player.sendMessage(ChatColor.GRAY + "");
         } else if (this.type == Type.BAN) {
 
-            final String kickMessage = ChatColor.RED + "Your account has been banned from the Orbit Network" + (this.isPermanent() ? "This punishment does not expire \n\n discord.orbit.rip \ndonate.orbit.rip":
-                    "\n " + ChatColor.RED + "Expires: " + ChatColor.YELLOW + FormatUtil.millisToRoundedTime(this.duration,true)
+            final String kickMessage = ChatColor.RED + "Your account has been banned from the Orbit Network" + (this.isPermanent() ? "\nThis type of punishment does not expire" + ChatColor.GRAY.toString() + CC.ITALIC + "\nYou can appeal this at http://discord.orbit.rip":
+                    "\n " + ChatColor.RED + "This punishment expires in: " + ChatColor.YELLOW + FormatUtil.millisToRoundedTime(this.duration,true)
             );
 
             Nebula.getInstance().getServer().getScheduler().runTaskLater(Nebula.getInstance(),() -> player.kickPlayer(kickMessage),5L);

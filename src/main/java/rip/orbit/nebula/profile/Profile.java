@@ -155,7 +155,6 @@ public class Profile {
     }
 
     public String getFancyName() {
-
         final Player player = this.getPlayer();
 
         if (player != null) {

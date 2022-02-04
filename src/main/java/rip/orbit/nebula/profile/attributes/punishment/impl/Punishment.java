@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.util.CC;
 
 import java.util.UUID;
 
@@ -74,7 +75,9 @@ public class Punishment implements IPunishment {
         }
 
         if (this.type == Type.WARN) {
-            player.sendMessage(ChatColor.RED + "You have been warned: " + ChatColor.YELLOW + this.executedReason);
+            player.sendMessage(ChatColor.GRAY + "");
+            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "You have been warned" + CC.RED + "\nReason: " + ChatColor.YELLOW + this.executedReason);
+            player.sendMessage(ChatColor.GRAY + "");
         } else if (this.type == Type.KICK) {
             final String kickMessage = ChatColor.RED + "You have been kicked by a staff member. \nReason: " + ChatColor.YELLOW + this.executedReason;
 

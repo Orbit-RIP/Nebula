@@ -39,7 +39,7 @@ public class ScopesMenu extends Menu {
 
 	@Override
 	public String getTitle(Player player) {
-		return "Scopes Menu";
+		return "Scopes";
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class ScopesMenu extends Menu {
 		@Override
 		public List<String> getDescription(Player var1) {
 			return Arrays.asList(
-					"",
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------",
 					ChatColor.YELLOW + "Click to confirm these grants.",
-					""
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------"
 			);
 		}
 
@@ -132,15 +132,15 @@ public class ScopesMenu extends Menu {
 		public List<String> getDescription(Player var1) {
 			if (menu.scopes.contains(server)) {
 				return Arrays.asList(
-						"",
+						ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------",
 						ChatColor.YELLOW + "Click to remove the " + server + " scope.",
-						""
+						ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------"
 				);
 			}
 			return Arrays.asList(
-					"",
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------",
 					ChatColor.YELLOW + "Click to select the " + server + " scope.",
-					""
+					ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------------"
 			);
 		}
 

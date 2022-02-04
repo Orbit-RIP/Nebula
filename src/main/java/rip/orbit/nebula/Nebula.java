@@ -68,15 +68,11 @@ public class Nebula extends JavaPlugin {
 	public void onDisable() {
 	}
 
-	public String c(String message) {
-		return ChatColor.translateAlternateColorCodes('&', message);
-	}
-
 	@AllArgsConstructor
 	@Getter
 	public enum Network {
 
-		FYRE(
+		ORBIT(
 				getInstance().getConfig().getString("servername"), getInstance().getConfig().getString("networkname"), ChatColor.valueOf(getInstance().getConfig().getString("mainColor")), ChatColor.valueOf(getInstance().getConfig().getString("secondColor")), ChatColor.valueOf(getInstance().getConfig().getString("alternativeColor")),
 				getInstance().getConfig().getString("domain"), getInstance().getConfig().getString("store"), getInstance().getConfig().getString("discord"), getInstance().getConfig().getString("teamspeak")
 		);

@@ -4,6 +4,7 @@ import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.profile.attributes.api.Pardonable;
 import rip.orbit.nebula.profile.attributes.punishment.IPunishment;
 import rip.orbit.nebula.profile.attributes.punishment.IPunishmentType;
+import rip.orbit.nebula.util.CC;
 import rip.orbit.nebula.util.FormatUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -148,18 +149,21 @@ public class RemoveAblePunishment implements IPunishment, Pardonable {
         }
 
         if (this.type == Type.MUTE) {
+            player.sendMessage(ChatColor.GRAY + "");
             player.sendMessage(ChatColor.RED + "You have been muted.");
             player.sendMessage(ChatColor.RED + "Expires: " + ChatColor.YELLOW + this.getDurationString());
+            player.sendMessage(ChatColor.GRAY.toString() + CC.ITALIC + "Buy an unmute at donate.orbit.rip (/buy)");
+            player.sendMessage(ChatColor.GRAY + "");
         } else if (this.type == Type.BAN) {
 
-            final String kickMessage = ChatColor.RED + "Your account has been banned from the " + Nebula.getInstance().getNetwork().getNetworkName() + " Network." + (this.isPermanent() ? "":
+            final String kickMessage = ChatColor.RED + "Your account has been banned from the Orbit Network" + (this.isPermanent() ? "This punishment does not expire \n\n discord.orbit.rip \ndonate.orbit.rip":
                     "\n " + ChatColor.RED + "Expires: " + ChatColor.YELLOW + FormatUtil.millisToRoundedTime(this.duration,true)
             );
 
             Nebula.getInstance().getServer().getScheduler().runTaskLater(Nebula.getInstance(),() -> player.kickPlayer(kickMessage),5L);
         } else if (this.type == Type.BLACKLIST) {
 
-            final String kickMessage = ChatColor.RED + "Your account has been blacklisted from the " + Nebula.getInstance().getNetwork().getNetworkName() +  " Network.";
+            final String kickMessage = ChatColor.RED + "Your account has been blacklisted from the Orbit Network \n This form of punishment cannot be appealed.";
 
             Nebula.getInstance().getServer().getScheduler().runTaskLater(Nebula.getInstance(),() -> player.kickPlayer(kickMessage),5L);
 

@@ -9,7 +9,7 @@ public class NebulaConstants {
 
     public static final String CONSOLE_NAME = ChatColor.DARK_RED.toString() + ChatColor.BOLD + "Console";
 
-    public static final String MONITOR_PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Monitor" + ChatColor.DARK_GRAY + "]";
+    public static final String MONITOR_PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "Monitor" + ChatColor.DARK_GRAY + "]";
 
     public static final String STAFF_PERMISSION = "orbit.staff";
     public static final String ADMIN_PERMISSION = "orbit.admin";
@@ -30,7 +30,7 @@ public class NebulaConstants {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(player.getUniqueId());
 
-        return profile.getActiveGrant().getRank().getPrefix() + (profile.getActivePrefix() == null ? "" : profile.getActivePrefix().getDisplay() + " ")
+        return profile.getActivePrefix() == null ? "" : profile.getActivePrefix().getDisplay() + " " + profile.getActiveGrant().getRank().getPrefix()
                 + ChatColor.getLastColors(profile.getActiveGrant().getRank().getPrefix()) + name + ChatColor.WHITE + ": "
                 + profile.getChatColor() + (player.isOp() ? ChatColor.translateAlternateColorCodes('&',message):message);
     }

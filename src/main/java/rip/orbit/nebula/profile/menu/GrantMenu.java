@@ -5,6 +5,7 @@ import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.attributes.grant.GrantBuilder;
 import rip.orbit.nebula.profile.attributes.grant.listener.GrantListener;
 import rip.orbit.nebula.rank.Rank;
+import rip.orbit.nebula.util.CC;
 import rip.orbit.nebula.util.ColorUtil;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.menu.Button;
@@ -38,6 +39,7 @@ public class GrantMenu extends PaginatedMenu {
 		Map<Integer, Button> buttons = new HashMap<>();
 
 		int i = -1;
+
 		for (Rank rank : Nebula.getInstance().getRankHandler().getSortedValueCache()) {
 			buttons.put(++i, new GrantButton(this.target, rank));
 		}
@@ -87,6 +89,7 @@ public class GrantMenu extends PaginatedMenu {
 
 			player.closeInventory();
 			player.sendMessage(ChatColor.YELLOW + "Type in the reason for granting " + profile.getName() + ChatColor.YELLOW + " the " + rank.getFancyName() + ChatColor.YELLOW + " rank.");
+			player.sendMessage(ChatColor.YELLOW + "Type " + CC.RED + "cancel " + CC.YELLOW + "to cancel the granting process");
 
 			GrantBuilder grantBuilder = new GrantBuilder();
 			grantBuilder.target = this.target;

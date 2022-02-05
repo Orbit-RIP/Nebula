@@ -1,3 +1,5 @@
 # Default ignored files
-/shelf/
-/workspace.xml
+/.idea/shelf/
+/.idea/workspace.xml
+/pom.xml
+/dependency-reduced-pom.xml

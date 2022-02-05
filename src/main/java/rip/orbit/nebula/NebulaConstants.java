@@ -25,12 +25,12 @@ public class NebulaConstants {
     public static final String PROFILE_COLLECTION = "profiles";
     public static final String ROLLBACK_LOG_COLLECTION = "rollback-logs";
 
-    public static String formatChatDisplay(Player player,String message) {
+    public static String formatChatDisplay(Player player, String message) {
         final String name = player.isDisguised() ? player.getDisguisedName():player.getName();
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(player.getUniqueId());
 
-        return profile.getActivePrefix() == null ? "" : profile.getActivePrefix().getDisplay() + " " + profile.getActiveGrant().getRank().getPrefix()
+        return profile.getActiveGrant().getRank().getPrefix()
                 + ChatColor.getLastColors(profile.getActiveGrant().getRank().getPrefix()) + name + ChatColor.WHITE + ": "
                 + profile.getChatColor() + (player.isOp() ? ChatColor.translateAlternateColorCodes('&',message):message);
     }

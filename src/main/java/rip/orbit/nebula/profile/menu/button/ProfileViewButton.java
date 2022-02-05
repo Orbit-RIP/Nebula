@@ -79,6 +79,6 @@ public class ProfileViewButton extends Button {
 
 	@Override
 	public void clicked(Player player, int slot, ClickType clickType) {
-
+		player.closeInventory();
 	}
 }

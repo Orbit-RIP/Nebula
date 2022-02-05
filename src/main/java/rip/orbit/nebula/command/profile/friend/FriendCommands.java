@@ -51,6 +51,7 @@ public class FriendCommands {
 			return;
 		}
 
+
 		profile.getBlocked().remove(target);
 		profile.save();
 

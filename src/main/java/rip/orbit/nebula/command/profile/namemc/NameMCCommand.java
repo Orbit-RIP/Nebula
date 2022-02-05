@@ -5,11 +5,19 @@ import cc.fyre.proton.uuid.UUIDCache;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.command.parameter.DurationWrapperParameter;
+import rip.orbit.nebula.command.profile.grant.SetRankCommand;
 import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.attributes.grant.Grant;
 import rip.orbit.nebula.rank.Rank;
 import rip.orbit.nebula.util.CC;
+import rip.orbit.nebula.util.DurationWrapper;
 import rip.orbit.nebula.util.namemc.NameMCVerification;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
@@ -35,15 +43,16 @@ public class NameMCCommand {
 		}
 
 		profile.getServerProfile().setClaimedNameMC(true);
-
-		Bukkit.broadcastMessage(CC.translate("&6&l[NAME MC] " + profile.getNameWithRank() + " &fhas just claimed their &e&nfree&f Star Rank by &b&nliking&f our &9&lNameMC Page&f! &7(/namemc)"));
+		Bukkit.broadcastMessage(CC.translate("&6&l[NAMEMC] " + profile.getNameWithRank() + " &fhas just claimed their &e&nfree&f Star Rank by &b&nliking&f our &9&lNameMC Page&f! &7(/namemc)"));
 
 		Rank rank = Nebula.getInstance().getRankHandler().fromName("Star");
 
 		Grant grant = new Grant(rank, UUIDCache.CONSOLE_UUID, (long) Integer.MAX_VALUE, "Claimed NameMC");
+		grant.getScopes().add("Global");
 
 		profile.getGrants().add(grant);
 		profile.recalculateGrants();
+		profile.save();
 	}
 
 }

@@ -28,7 +28,11 @@ public class ChatListener implements Listener {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(event.getPlayer().getUniqueId());
 
-        event.setFormat(NebulaConstants.formatChatDisplay(profile.getPlayer(), event.getMessage()));
+        if (profile.getActivePrefix() == null) {
+            event.setFormat(NebulaConstants.formatChatDisplay(profile.getPlayer(), event.getMessage()));
+        } else {
+            event.setFormat(profile.getActivePrefix().getDisplay() + " " + NebulaConstants.formatChatDisplay(profile.getPlayer(), event.getMessage()));
+        }
 
         if (profile.getActivePunishment(RemoveAblePunishment.Type.MUTE) != null) {
 

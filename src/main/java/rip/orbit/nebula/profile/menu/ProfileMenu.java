@@ -1,8 +1,5 @@
 package rip.orbit.nebula.profile.menu;
 
-import rip.orbit.nebula.profile.menu.button.OpenGlobalStatsButton;
-import rip.orbit.nebula.profile.menu.button.OpenNotificationsButton;
-import rip.orbit.nebula.profile.menu.button.ProfileViewButton;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.menu.Button;
 import cc.fyre.proton.menu.Menu;
@@ -10,6 +7,10 @@ import cc.fyre.proton.util.ItemBuilder;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.profile.menu.button.OpenFriendsButton;
+import rip.orbit.nebula.profile.menu.button.OpenGlobalStatsButton;
+import rip.orbit.nebula.profile.menu.button.OpenNotificationsButton;
+import rip.orbit.nebula.profile.menu.button.ProfileViewButton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,10 +51,12 @@ public class ProfileMenu extends Menu {
 
 		if (this.uuid == player.getUniqueId()) {
 			buttons.put(20, new OpenNotificationsButton(this.uuid, true));
-			buttons.put(22, new ProfileViewButton(this.uuid));
+			buttons.put(22, new OpenFriendsButton(this.uuid, true));
+			buttons.put(4, new ProfileViewButton(this.uuid));
 			buttons.put(24, new OpenGlobalStatsButton(this.uuid));
 		} else {
-			buttons.put(21, new ProfileViewButton(this.uuid));
+			buttons.put(4, new ProfileViewButton(this.uuid));
+			buttons.put(21, new OpenFriendsButton(this.uuid, false));
 			buttons.put(23, new OpenGlobalStatsButton(this.uuid));
 		}
 

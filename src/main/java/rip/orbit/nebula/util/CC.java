@@ -1,11 +1,16 @@
 package rip.orbit.nebula.util;
 
+import net.minecraft.util.com.mojang.authlib.GameProfile;
+import net.minecraft.util.com.mojang.authlib.properties.Property;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class CC {
 
@@ -62,6 +67,44 @@ public class CC {
 		}
 
 		return toAdd;
+	}
+
+	public static ItemStack getCustomHead(String name, int amount, String url, String... lore) {
+		ItemStack stack = getCustomHead(name, amount, url);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setLore(translate(Arrays.asList(lore)));
+		stack.setItemMeta(meta);
+		return stack;
+	}
+
+	public static ItemStack getCustomHead(String name, int amount, String url) {
+		ItemStack skull = new ItemStack(Material.SKULL_ITEM, amount, (short) 3);
+
+		SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+		try {
+			if (url.length() < 16) {
+				skullMeta.setOwner(url);
+			} else {
+				GameProfile gameProfile = new GameProfile(UUID.randomUUID(), null);
+				byte[] data = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", "https://textures.minecraft.net/texture/" + url).getBytes());
+				gameProfile.getProperties().put("textures", new Property("textures", new String(data)));
+
+				try {
+					Field field = skullMeta.getClass().getDeclaredField("profile");
+					field.setAccessible(true);
+					field.set(skullMeta, gameProfile);
+				} catch (Exception ignored) {
+
+				}
+			}
+			skullMeta.setDisplayName(translate(name));
+			skull.setItemMeta(skullMeta);
+		} catch (Exception ignored) {
+
+		}
+
+		return skull;
 	}
 
 }

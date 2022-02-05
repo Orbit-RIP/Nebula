@@ -1,12 +1,13 @@
 package rip.orbit.nebula.profile.menu.button;
 
-import rip.orbit.nebula.profile.menu.GlobalStatsMenu;
-import rip.orbit.nebula.util.CC;
+import cc.fyre.proton.Proton;
 import cc.fyre.proton.menu.Button;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import rip.orbit.nebula.profile.menu.GlobalStatsMenu;
+import rip.orbit.nebula.util.CC;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +31,16 @@ public class OpenGlobalStatsButton extends Button {
 
 	@Override
 	public List<String> getDescription(Player var1) {
+		if (var1.getUniqueId() == uuid) {
+			return CC.translate(Arrays.asList(
+					"&7&m-----------------",
+					"&6&l┃ &fClick to view your global statistics.",
+					"&7&m-----------------"
+			));
+		}
 		return CC.translate(Arrays.asList(
 				"&7&m-----------------",
-				"&6&l┃ &fClick to view your global statistics.",
+				"&6&l┃ &fClick to view " + Proton.getInstance().getUuidCache().name(this.uuid) + "'s global statistics.",
 				"&7&m-----------------"
 		));
 	}

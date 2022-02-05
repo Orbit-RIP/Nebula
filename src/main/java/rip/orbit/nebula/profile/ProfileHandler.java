@@ -1,5 +1,30 @@
 package rip.orbit.nebula.profile;
 
+import cc.fyre.proton.Proton;
+import cc.fyre.proton.pidgin.packet.handler.IncomingPacketHandler;
+import cc.fyre.proton.pidgin.packet.listener.PacketListener;
+import cc.fyre.proton.util.MojangUtil;
+import cc.fyre.proton.util.UUIDUtils;
+import cc.fyre.proton.uuid.UUIDCache;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.ReplaceOptions;
+import lombok.Getter;
+import org.bson.Document;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.NebulaConstants;
 import rip.orbit.nebula.prefix.Prefix;
@@ -19,35 +44,17 @@ import rip.orbit.nebula.profile.attributes.server.ServerProfile;
 import rip.orbit.nebula.profile.disguise.DisguiseProfile;
 import rip.orbit.nebula.profile.event.GrantExpireEvent;
 import rip.orbit.nebula.profile.friend.FriendRequest;
+import rip.orbit.nebula.profile.friend.packet.FriendRemovePacket;
+import rip.orbit.nebula.profile.friend.packet.FriendRequestAcceptPacket;
+import rip.orbit.nebula.profile.friend.packet.FriendRequestRemovePacket;
 import rip.orbit.nebula.profile.friend.packet.FriendRequestSendPacket;
 import rip.orbit.nebula.profile.packet.PermissionAddPacket;
 import rip.orbit.nebula.profile.packet.PermissionRemovePacket;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
 import rip.orbit.nebula.util.CC;
 import rip.orbit.nebula.util.EncryptionHandler;
-import rip.orbit.nebula.util.FormatUtil;
+import rip.orbit.nebula.util.JavaUtils;
 import rip.orbit.nebula.util.fanciful.FancyMessage;
-import cc.fyre.proton.Proton;
-import cc.fyre.proton.pidgin.packet.handler.IncomingPacketHandler;
-import cc.fyre.proton.pidgin.packet.listener.PacketListener;
-import cc.fyre.proton.util.MojangUtil;
-import cc.fyre.proton.util.UUIDUtils;
-import cc.fyre.proton.uuid.UUIDCache;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.ReplaceOptions;
-import lombok.Getter;
-import org.bson.Document;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import java.io.IOException;
 import java.util.*;
@@ -79,6 +86,9 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		Proton.getInstance().getPidginHandler().registerPacket(PunishmentExecutePacket.class);
 		Proton.getInstance().getPidginHandler().registerPacket(PunishmentPardonPacket.class);
+		Proton.getInstance().getPidginHandler().registerPacket(FriendRemovePacket.class);
+		Proton.getInstance().getPidginHandler().registerPacket(FriendRequestRemovePacket.class);
+		Proton.getInstance().getPidginHandler().registerPacket(FriendRequestAcceptPacket.class);
 
 		Proton.getInstance().getPidginHandler().registerListener(this);
 
@@ -214,7 +224,11 @@ public class ProfileHandler implements Listener, PacketListener {
 		}
 
 		if (document.containsKey("friendRequests")) {
-			profile.setFriendRequests(Proton.PLAIN_GSON.<List<FriendRequest>>fromJson(document.getString("friendRequests"), ArrayList.class));
+			for (JsonElement jsonElement : new JsonParser().parse(document.getString("friendRequests")).getAsJsonArray()) {
+				if ((jsonElement.getAsJsonObject().get("sentAt").getAsLong() + JavaUtils.parse("5m")) - System.currentTimeMillis() < 0)
+					continue;
+				profile.getFriendRequests().add(FriendRequest.deserialize(jsonElement.getAsJsonObject()));
+			}
 		}
 
 		if (document.containsKey("permissions")) {
@@ -257,7 +271,10 @@ public class ProfileHandler implements Listener, PacketListener {
 		document.put("siblings", Proton.PLAIN_GSON.toJson(profile.getSiblings().stream().map(UUID::toString).collect(Collectors.toList())));
 		document.put("blocked", Proton.PLAIN_GSON.toJson(profile.getBlocked().stream().map(UUID::toString).collect(Collectors.toList())));
 		document.put("friends", Proton.PLAIN_GSON.toJson(profile.getFriends().stream().map(UUID::toString).collect(Collectors.toList())));
-		document.put("friendRequests", Proton.PLAIN_GSON.toJson(profile.getFriendRequests()));
+
+		JsonArray friendrequests = new JsonArray();
+		profile.getFriendRequests().forEach(request -> friendrequests.add(request.serialize()));
+		document.put("friendRequests", friendrequests.toString());
 
 		document.put("activeGrant", profile.getActiveGrant().getUuid().toString());
 
@@ -531,6 +548,27 @@ public class ProfileHandler implements Listener, PacketListener {
 
 	}
 
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlayerKick(PlayerKickEvent event) {
+
+		final Player player = event.getPlayer();
+
+		final Profile profile = this.fromUuid(player.getUniqueId());
+
+		profile.getServerProfile().setOnline(false);
+		profile.getServerProfile().setLastLogin(System.currentTimeMillis());
+		profile.getServerProfile().setLastServer(Nebula.getInstance().getConfig().getString("server.name"));
+
+		profile.save();
+
+		this.cache.remove(player.getUniqueId());
+
+		if (player.isDisguised()) {
+			player.undisguise();
+		}
+
+	}
+
 	@IncomingPacketHandler
 	public void onPunishmentExecute(PunishmentExecutePacket packet) {
 		final Document document = packet.document();
@@ -714,4 +752,62 @@ public class ProfileHandler implements Listener, PacketListener {
 
 	}
 
+	@IncomingPacketHandler
+	public void onFriendRemove(FriendRemovePacket packet) {
+
+		Player target = Bukkit.getPlayer(packet.target());
+		String name = Proton.getInstance().getUuidCache().name(packet.sender());
+		if (target != null) {
+
+			target.sendMessage(CC.translate("&7&m---------------------"));
+			target.sendMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + name + " &fhas just removed you as a friend."));
+			target.sendMessage(CC.translate("&7&m---------------------"));
+
+			Profile profile = getCache().get(target.getUniqueId());
+
+			profile.getFriends().remove(Proton.getInstance().getUuidCache().uuid(name));
+			profile.save();
+		}
+
+	}
+
+	@IncomingPacketHandler
+	public void onFriendRequestRemove(FriendRequestRemovePacket packet) {
+
+		Player target = Bukkit.getPlayer(packet.target());
+		String name = Proton.getInstance().getUuidCache().name(packet.sender());
+		if (target != null) {
+
+			target.sendMessage(CC.translate("&7&m---------------------"));
+			target.sendMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + name + " &fhas just rejected your friend request."));
+			target.sendMessage(CC.translate("&7&m---------------------"));
+
+			Profile profile = getCache().get(target.getUniqueId());
+
+			profile.getFriendRequests().remove(profile.getFriendRequestFromSender(Proton.getInstance().getUuidCache().uuid(name)));
+			profile.save();
+
+		}
+
+	}
+
+	@IncomingPacketHandler
+	public void onFriendRequestAcceptPacket(FriendRequestAcceptPacket packet) {
+
+		Player target = Bukkit.getPlayer(packet.target());
+		String name = Proton.getInstance().getUuidCache().name(packet.sender());
+		if (target != null) {
+
+			target.sendMessage(CC.translate("&7&m---------------------"));
+			target.sendMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + name + " &fhas just accepted your friend request."));
+			target.sendMessage(CC.translate("&7&m---------------------"));
+
+			Profile profile = getCache().get(target.getUniqueId());
+
+			profile.getFriendRequests().removeIf(friendRequest -> packet.sender().toString().equals(target.toString()));
+			profile.save();
+
+		}
+
+	}
 }

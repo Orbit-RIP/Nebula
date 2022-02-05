@@ -1,11 +1,12 @@
 package rip.orbit.nebula.notifications.menu.button;
 
-import rip.orbit.nebula.notifications.menu.NotificationsMenu;
-import rip.orbit.nebula.util.CC;
 import cc.fyre.proton.menu.Button;
+import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import rip.orbit.nebula.notifications.menu.NotificationsMenu;
+import rip.orbit.nebula.util.CC;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
  * 25/11/2021 / 7:56 PM
  * LBuddyBoy Development / me.lbuddyboy.core.notifcation.menu.button
  */
+
+@AllArgsConstructor
 public class ViewAllNotificationsButton extends Button {
 
 	private boolean backButton;

@@ -6,7 +6,7 @@
 
     <groupId>rip.orbit.nebula</groupId>
     <artifactId>Nebula</artifactId>
-    <version>1.1-DEV</version>
+    <version>1.0-DEV</version>
 
     <dependencies>
         <dependency>

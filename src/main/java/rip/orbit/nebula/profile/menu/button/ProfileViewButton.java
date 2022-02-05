@@ -1,8 +1,5 @@
 package rip.orbit.nebula.profile.menu.button;
 
-import rip.orbit.nebula.Nebula;
-import rip.orbit.nebula.profile.Profile;
-import rip.orbit.nebula.util.CC;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.menu.Button;
 import lombok.AllArgsConstructor;
@@ -11,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.util.CC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class ProfileViewButton extends Button {
 	@Override
 	public List<String> getDescription(Player var1) {
 
-		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(this.uuid);
+		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(this.uuid, true);
 
 		List<String> lore = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class ProfileViewButton extends Button {
 			lore.add("&6&l┃ &fFirst Login: &6" + profile.getServerProfile().getFirstLoginString());
 		} else {
 			lore.add("&6&l┃ &fLast Server: &6" + profile.getServerProfile().getLastServer());
-			lore.add("&6&l┃ &fLast Seen: &6" + profile.getServerProfile().getLastSeenString());
+			lore.add("&6&l┃ &fLast Seen: &6" + profile.getServerProfile().getLastSeenString() + " ago");
 		}
 		lore.add("&7&m-----------------");
 

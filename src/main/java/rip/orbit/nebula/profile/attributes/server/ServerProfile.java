@@ -9,12 +9,13 @@ import org.bson.Document;
 @Data
 public class ServerProfile {
 
-	private boolean online;
+	private boolean online, claimedNameMC;
 	private Long firstLogin, lastLogin;
 	private String lastServer;
 
 	public ServerProfile(Document document) {
 		this.online = document.getBoolean("online");
+		this.claimedNameMC = document.getBoolean("claimedNameMC");
 		this.firstLogin = document.getLong("firstLogin");
 		this.lastLogin = document.getLong("lastLogin");
 		this.lastServer = document.getString("lastServer");
@@ -28,6 +29,7 @@ public class ServerProfile {
 		toReturn.put("firstLogin", this.firstLogin);
 		toReturn.put("lastLogin", this.lastLogin);
 		toReturn.put("lastServer", this.lastServer);
+		toReturn.put("claimedNameMC", this.claimedNameMC);
 
 		return toReturn;
 	}

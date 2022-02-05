@@ -1,7 +1,5 @@
 package rip.orbit.nebula.notifications;
 
-import rip.orbit.nebula.Nebula;
-import rip.orbit.nebula.notifications.packet.NotificationUpdatePacket;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.pidgin.packet.handler.IncomingPacketHandler;
 import cc.fyre.proton.pidgin.packet.listener.PacketListener;
@@ -14,10 +12,13 @@ import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.notifications.packet.NotificationUpdatePacket;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
@@ -65,7 +66,7 @@ public class NotificationHandler implements PacketListener {
 
 	public void loadNotification(Document document) {
 		this.notifications.add(new Notification(document.getInteger("id"), document.getString("title"), document.getString("message"),
-				document.getLong("sentAt"), Proton.PLAIN_GSON.<List<UUID>>fromJson(document.getString("readPlayers"), ArrayList.class)
+				document.getLong("sentAt"), Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("readPlayers"), ArrayList.class).stream().map(UUID::fromString).collect(Collectors.toList())
 		, false));
 	}
 
@@ -85,7 +86,7 @@ public class NotificationHandler implements PacketListener {
 		document.put("title", notification.getTitle());
 		document.put("message", notification.getMessage());
 		document.put("sentAt", notification.getSentAt());
-		document.put("readPlayers", Proton.PLAIN_GSON.toJson(notification.getMarkedReadPlayers(), ArrayList.class));
+		document.put("readPlayers", Proton.PLAIN_GSON.toJson(notification.getMarkedReadPlayers().stream().map(UUID::toString).collect(Collectors.toList()), ArrayList.class));
 
 		this.collection.replaceOne(Filters.eq("id", notification.getId()), document, new ReplaceOptions().upsert(true));
 	}

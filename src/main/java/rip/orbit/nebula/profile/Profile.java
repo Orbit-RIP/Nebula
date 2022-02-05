@@ -1,5 +1,13 @@
 package rip.orbit.nebula.profile;
 
+import cc.fyre.proton.util.qr.TotpUtil;
+import cc.fyre.proton.uuid.UUIDCache;
+import com.mongodb.client.model.Filters;
+import lombok.Data;
+import org.bson.Document;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.prefix.Prefix;
 import rip.orbit.nebula.profile.attributes.ProfilePermissible;
@@ -17,15 +25,6 @@ import rip.orbit.nebula.profile.friend.FriendRequest;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
 import rip.orbit.nebula.profile.stat.StatType;
 import rip.orbit.nebula.rank.Rank;
-import cc.fyre.proton.util.qr.TotpUtil;
-import cc.fyre.proton.uuid.UUIDCache;
-import com.mongodb.client.model.Filters;
-import lombok.Data;
-import org.bson.Document;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class Profile {
         this.ipAddress = null;
 
         this.globalStatistics = new ArrayList<>();
-        this.serverProfile = new ServerProfile(true, System.currentTimeMillis(), System.currentTimeMillis(), Nebula.getInstance().getConfig().getString("server.name"));
+        this.serverProfile = new ServerProfile(true, false, System.currentTimeMillis(), System.currentTimeMillis(), Nebula.getInstance().getConfig().getString("server.name"));
         this.disguiseProfile = null;
 
         this.chatColor = ChatColor.WHITE;
@@ -162,6 +161,16 @@ public class Profile {
         }
 
         return this.getActiveRank().getColor().toString() + (this.getActiveRank().getSecondColor() != null ? this.getActiveRank().getSecondColor() : "") + this.name;
+    }
+
+    public String getNameWithRank() {
+        final Player player = this.getPlayer();
+
+        if (player != null) {
+            return player.getDisplayName();
+        }
+
+        return this.getActiveRank().getPrefix() + (this.getActiveRank().getSecondColor() != null ? this.getActiveRank().getSecondColor() : "") + this.name;
     }
 
     public Player getPlayer() {

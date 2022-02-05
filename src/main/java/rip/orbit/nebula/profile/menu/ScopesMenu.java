@@ -1,14 +1,5 @@
 package rip.orbit.nebula.profile.menu;
 
-import rip.orbit.nebula.Nebula;
-import rip.orbit.nebula.command.parameter.DurationWrapperParameter;
-import rip.orbit.nebula.command.profile.grant.SetRankCommand;
-import rip.orbit.nebula.profile.Profile;
-import rip.orbit.nebula.profile.attributes.grant.GrantBuilder;
-import rip.orbit.nebula.profile.attributes.grant.listener.GrantListener;
-import rip.orbit.nebula.rank.Rank;
-import rip.orbit.nebula.util.ColorUtil;
-import rip.orbit.nebula.util.DurationWrapper;
 import cc.fyre.proton.menu.Button;
 import cc.fyre.proton.menu.Menu;
 import lombok.AllArgsConstructor;
@@ -18,6 +9,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.command.parameter.DurationWrapperParameter;
+import rip.orbit.nebula.command.profile.grant.SetRankCommand;
+import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.profile.attributes.grant.GrantBuilder;
+import rip.orbit.nebula.profile.attributes.grant.listener.GrantListener;
+import rip.orbit.nebula.rank.Rank;
+import rip.orbit.nebula.util.CC;
+import rip.orbit.nebula.util.ColorUtil;
+import rip.orbit.nebula.util.DurationWrapper;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -125,7 +126,7 @@ public class ScopesMenu extends Menu {
 
 		@Override
 		public String getName(Player var1) {
-			return this.server;
+			return CC.translate("&6&l" + this.server);
 		}
 
 		@Override

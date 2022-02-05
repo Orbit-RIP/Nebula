@@ -1,22 +1,23 @@
 package rip.orbit.nebula;
 
+import cc.fyre.proton.Proton;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.java.JavaPlugin;
 import rip.orbit.nebula.command.parameter.*;
 import rip.orbit.nebula.database.MongoHandler;
 import rip.orbit.nebula.listener.ChatListener;
 import rip.orbit.nebula.notifications.NotificationHandler;
 import rip.orbit.nebula.prefix.Prefix;
 import rip.orbit.nebula.prefix.PrefixHandler;
+import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.ProfileHandler;
 import rip.orbit.nebula.profile.attributes.rollback.RollbackType;
 import rip.orbit.nebula.rank.Rank;
 import rip.orbit.nebula.rank.RankHandler;
 import rip.orbit.nebula.server.ServerHandler;
 import rip.orbit.nebula.util.DurationWrapper;
-import cc.fyre.proton.Proton;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.bukkit.ChatColor;
-import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
 public class Nebula extends JavaPlugin {
@@ -66,6 +67,10 @@ public class Nebula extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		for (Profile profile : getProfileHandler().getCache().values()) {
+			profile.getServerProfile().setOnline(false);
+			profile.save();
+		}
 	}
 
 	@AllArgsConstructor

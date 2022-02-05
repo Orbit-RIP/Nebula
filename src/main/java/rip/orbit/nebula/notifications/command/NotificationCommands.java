@@ -1,16 +1,16 @@
 package rip.orbit.nebula.notifications.command;
 
-import rip.orbit.nebula.Nebula;
-import rip.orbit.nebula.notifications.Notification;
-import rip.orbit.nebula.notifications.menu.ManageNotificationsMenu;
-import rip.orbit.nebula.notifications.menu.NotificationsMenu;
-import rip.orbit.nebula.notifications.packet.NotificationUpdatePacket;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.command.Command;
 import cc.fyre.proton.command.param.Parameter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.notifications.Notification;
+import rip.orbit.nebula.notifications.menu.ManageNotificationsMenu;
+import rip.orbit.nebula.notifications.menu.NotificationsMenu;
+import rip.orbit.nebula.notifications.packet.NotificationUpdatePacket;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class NotificationCommands {
 
 	@Command(names = {"managenotifications", "managenotifs", "notification manage", "notifications manage"}, permission = "orbit.headstaff")
 	public static void managenotifications(Player sender) {
-		new ManageNotificationsMenu().openMenu(sender);
+		new ManageNotificationsMenu(false).openMenu(sender);
 	}
 
 	@Command(names = {"notifications", "checknotifications", "checknotifs"}, permission = "")

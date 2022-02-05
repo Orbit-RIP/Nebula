@@ -1,19 +1,20 @@
 package rip.orbit.nebula.command.profile.friend;
 
-import rip.orbit.nebula.Nebula;
-import rip.orbit.nebula.profile.Profile;
-import rip.orbit.nebula.profile.friend.FriendRequest;
-import rip.orbit.nebula.profile.friend.packet.FriendRequestSendPacket;
-import rip.orbit.nebula.util.CC;
-import rip.orbit.nebula.util.fanciful.FancyMessage;
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.command.Command;
 import cc.fyre.proton.command.param.Parameter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.profile.friend.FriendRequest;
+import rip.orbit.nebula.profile.friend.menu.FriendsMenu;
+import rip.orbit.nebula.profile.friend.packet.FriendRemovePacket;
+import rip.orbit.nebula.profile.friend.packet.FriendRequestAcceptPacket;
+import rip.orbit.nebula.profile.friend.packet.FriendRequestSendPacket;
+import rip.orbit.nebula.util.CC;
+import rip.orbit.nebula.util.fanciful.FancyMessage;
 
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 import java.util.UUID;
 
 /**
@@ -61,14 +62,24 @@ public class FriendCommands {
 	public static void friendAdd(Player sender, @Parameter(name = "target") UUID target) {
 
 		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
-		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
+		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(target, true);
+
+		if (profile.getFriendRequestFromSender(target) != null) {
+			friendAccept(sender, target, profile, targetProfile);
+			return;
+		}
+
+		if (sender.getUniqueId().equals(target)) {
+			sender.sendMessage(CC.translate("&cYou can't friend yourself!"));
+			return;
+		}
 
 		if (targetProfile.getBlocked().contains(sender.getUniqueId())) {
 			sender.sendMessage(CC.translate("&cThat player has you blocked."));
 			return;
 		}
 
-		if (targetProfile.getFriendRequestFromSender(sender.getUniqueId()) != null || targetProfile.getFriendRequestFromTarget(target) != null) {
+		if (targetProfile.getFriendRequestFromSender(sender.getUniqueId()) != null) {
 			sender.sendMessage(CC.translate("&cYou already have a friend request outgoing for that person."));
 			return;
 		}
@@ -101,15 +112,17 @@ public class FriendCommands {
 			targetPlayer.sendMessage(CC.translate("&7&m---------------------"));
 		}
 
+		sender.sendMessage(CC.translate("&aSuccessfully sent a friend request to " + targetProfile.getName() + "."));
+
 	}
 
 	@Command(names = {"friend accept"}, permission = "")
 	public static void friendAccept(Player sender, @Parameter(name = "target") UUID target) {
 
 		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
-		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
+		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(target, true);
 
-		if (targetProfile.getFriendRequestFromSender(target) == null) {
+		if (profile.getFriendRequestFromSender(target) == null) {
 			sender.sendMessage(CC.translate("&cCould not find a friend request from that player."));
 			return;
 		}
@@ -119,28 +132,38 @@ public class FriendCommands {
 			return;
 		}
 
+		friendAccept(sender, target, profile, targetProfile);
+
+	}
+
+	public static void friendAccept(Player sender, UUID target, Profile profile, Profile targetProfile) {
+		profile.getFriendRequests().removeIf(friendRequest -> friendRequest.getSender().toString().equals(target.toString()));
+
 		profile.getFriends().add(target);
 		targetProfile.getFriends().add(sender.getUniqueId());
 
 		profile.save();
-		targetProfile.save();
 
 		Player targetPlayer = Bukkit.getPlayer(target);
 		if (targetPlayer == null) {
-			Proton.getInstance().getPidginHandler().sendPacket(new FriendRequestSendPacket(sender.getUniqueId(), target));
+			Proton.getInstance().getPidginHandler().sendPacket(new FriendRequestAcceptPacket(sender.getUniqueId(), target));
 		} else {
+			targetProfile.getFriendRequests().removeIf(friendRequest -> friendRequest.getSender().toString().equals(target.toString()));
+			targetProfile.save();
+
 			targetPlayer.sendMessage(CC.translate("&7&m---------------------"));
 			targetPlayer.sendMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + sender.getName() + " &fhas just accepted your friend request."));
 			targetPlayer.sendMessage(CC.translate("&7&m---------------------"));
 		}
 
+		sender.sendMessage(CC.translate("&aSuccessfully accepted " + targetProfile.getName() + " as a friend."));
 	}
 
 	@Command(names = {"friend remove"}, permission = "")
 	public static void friendRemove(Player sender, @Parameter(name = "target") UUID target) {
 
 		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
-		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
+		Profile targetProfile = Nebula.getInstance().getProfileHandler().fromUuid(target, true);
 
 		if (!profile.getFriends().contains(target)) {
 			sender.sendMessage(CC.translate("&cYou are not friends with that person."));
@@ -155,32 +178,20 @@ public class FriendCommands {
 
 		Player targetPlayer = Bukkit.getPlayer(target);
 		if (targetPlayer == null) {
-			Proton.getInstance().getPidginHandler().sendPacket(new FriendRequestSendPacket(sender.getUniqueId(), target));
+			Proton.getInstance().getPidginHandler().sendPacket(new FriendRemovePacket(sender.getUniqueId(), target));
 		} else {
 			targetPlayer.sendMessage(CC.translate("&7&m---------------------"));
 			targetPlayer.sendMessage(CC.translate("&6&l[FRIEND REQUEST] &6" + sender.getName() + " &fhas just removed you as a friend."));
 			targetPlayer.sendMessage(CC.translate("&7&m---------------------"));
 		}
 
+		sender.sendMessage(CC.translate("&aSuccessfully removed " + targetProfile.getName() + " as a friend."));
+
 	}
 
-	/*
-	WIP
-	 */
-	@Command(names = "friendrequests", permission = "")
-	public static void friendrequests(Player sender) {
-		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(sender.getUniqueId());
-
-		int i = 0;
-		for (FriendRequest request : profile.getFriendRequests()) {
-			sender.sendMessage(CC.translate("&6FR #" + (i++)));
-			sender.sendMessage(CC.translate("&6Sender: " + request.getSender()));
-			sender.sendMessage(CC.translate("&6Target: " + request.getTarget()));
-			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.setTimeZone(TimeZone.getTimeZone("EST"));
-			sender.sendMessage(CC.translate("&6Sent At: " + sdf.format(request.getSentAt())));
-		}
-
+	@Command(names = "friends", permission = "")
+	public static void friends(Player sender, @Parameter(name = "target", defaultValue = "self") UUID target) {
+		new FriendsMenu(target, false).openMenu(sender);
 	}
 
 }

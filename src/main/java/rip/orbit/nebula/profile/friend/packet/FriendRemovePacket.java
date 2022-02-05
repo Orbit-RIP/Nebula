@@ -2,7 +2,9 @@ package rip.orbit.nebula.profile.friend.packet;
 
 import cc.fyre.proton.pidgin.packet.Packet;
 import com.google.gson.JsonObject;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
@@ -11,6 +13,9 @@ import java.util.UUID;
  * 02/02/2022 / 10:03 PM
  * Orbit Dev / rip.orbit.nebula.profile.friend.packet
  */
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class FriendRemovePacket implements Packet {
 
 	@Getter
@@ -24,7 +29,7 @@ public class FriendRemovePacket implements Packet {
 
 	@Override
 	public int id() {
-		return 293;
+		return 29320;
 	}
 
 	@Override

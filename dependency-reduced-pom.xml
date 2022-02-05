@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>rip.orbit.nebula</groupId>
   <artifactId>Nebula</artifactId>
-  <version>1.1-DEV</version>
+  <version>1.0-DEV</version>
   <build>
     <plugins>
       <plugin>

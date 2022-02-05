@@ -5,16 +5,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77fad4a1-12fa-4257-aa30-207c8a60e274" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nebula.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/NebulaConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/NebulaConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/friend/FriendCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/friend/FriendCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/namemc/NameMCCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/namemc/NameMCCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/listener/ChatListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/listener/ChatListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/ProfileViewButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/ProfileViewButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/HistoryCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/HistoryCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/ProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/ProfileCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/grant/GrantCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/grant/GrantCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/grant/GrantsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/grant/GrantsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/notifications/menu/NotificationsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/notifications/menu/NotificationsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/api/Pardonable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/api/Pardonable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/punishment/IPunishmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/punishment/IPunishmentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/friend/menu/FriendsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/friend/menu/FriendsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/GlobalStatsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/GrantMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/grants/GrantMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/GrantsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/grants/GrantsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/HistoryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/HistoryMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/MainHistoryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/MainHistoryMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/OpenFriendsButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/OpenFriendsButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/OpenGlobalStatsButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/OpenGlobalStatsButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/OpenNotificationsButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/OpenNotificationsButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/ProfileViewButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/ProfileViewButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/button/SelectPunishmentTypeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/buttons/SelectPunishmentTypeButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/namemc/NameMCCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/namemc/NameMCCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/HistoryCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/HistoryCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/ProfileCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/ProfileCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/grant/GrantCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/grant/GrantCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/grant/GrantsCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/grant/GrantsCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/notifications/menu/NotificationsMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/notifications/menu/NotificationsMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/api/Pardonable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/api/Pardonable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/punishment/IPunishmentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/punishment/IPunishmentType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/friend/menu/FriendsMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/friend/menu/FriendsMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GlobalStatsMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GrantMenu$GrantButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GrantMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GrantsMenu$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GrantsMenu$RemovePrompt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/GrantsMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/HistoryMenu$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/HistoryMenu$NextPageButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/HistoryMenu$PreviousPageButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/HistoryMenu$PunishmentButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/HistoryMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/MainHistoryMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/ProfileMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/button/OpenFriendsButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/button/OpenGlobalStatsButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/button/OpenNotificationsButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/button/ProfileViewButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/button/SelectPunishmentTypeButton.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
@@ -24,6 +63,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

@@ -24,12 +24,6 @@ public interface Pardonable {
             return NebulaConstants.CONSOLE_NAME;
         }
 
-        final Player player = Nebula.getInstance().getServer().getPlayer(this.getPardoner());
-
-        if (player != null) {
-            return player.getDisplayName();
-        }
-
         return Nebula.getInstance().getProfileHandler().fromUuid(this.getPardoner(),true).getFancyName();
     }
 

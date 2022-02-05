@@ -154,12 +154,6 @@ public class Profile {
     }
 
     public String getFancyName() {
-        final Player player = this.getPlayer();
-
-        if (player != null) {
-            return player.getDisplayName();
-        }
-
         return this.getActiveRank().getColor().toString() + (this.getActiveRank().getSecondColor() != null ? this.getActiveRank().getSecondColor() : "") + this.name;
     }
 

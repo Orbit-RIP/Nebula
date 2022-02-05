@@ -17,7 +17,7 @@ public interface IPunishmentType {
         } else if (this.equals(Punishment.Type.WARN)) {
             return CC.translate("&bWarns");
         } else if (this.equals(RemoveAblePunishment.Type.BLACKLIST)) {
-            return CC.translate("&0Blacklists");
+            return CC.translate("&6&lBlacklists");
         } else if (this.equals(RemoveAblePunishment.Type.MUTE)) {
             return CC.translate("&eMutes");
         } else if (this.equals(RemoveAblePunishment.Type.BAN)) {

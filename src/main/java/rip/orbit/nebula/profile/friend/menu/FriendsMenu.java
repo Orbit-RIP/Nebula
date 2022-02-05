@@ -15,7 +15,7 @@ import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.friend.menu.button.FilterFriendsButton;
 import rip.orbit.nebula.profile.friend.menu.button.FriendButton;
 import rip.orbit.nebula.profile.friend.menu.button.ViewFriendRequestsButton;
-import rip.orbit.nebula.profile.menu.ProfileMenu;
+import rip.orbit.nebula.profile.menu.profile.ProfileMenu;
 import rip.orbit.nebula.util.CC;
 
 import java.util.*;

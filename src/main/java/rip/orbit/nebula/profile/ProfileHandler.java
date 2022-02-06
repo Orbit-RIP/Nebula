@@ -529,9 +529,7 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		profile.save();
 
-		if (!event.getPlayer().hasMetadata("location")) {
-			this.cache.remove(player.getUniqueId());
-		}
+		this.cache.remove(player.getUniqueId());
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
@@ -547,10 +545,7 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		profile.save();
 
-		if (!event.getReason().contains("location")) {
-			player.setMetadata("location", new FixedMetadataValue(Nebula.getInstance(), true));
-			this.cache.remove(player.getUniqueId());
-		}
+		this.cache.remove(player.getUniqueId());
 
 	}
 

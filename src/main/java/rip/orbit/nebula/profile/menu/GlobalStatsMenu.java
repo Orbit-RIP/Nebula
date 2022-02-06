@@ -57,7 +57,7 @@ public class GlobalStatsMenu extends Menu {
 
 		buttons.put(4, new BackButton(new ProfileMenu(this.uuid)));
 
-		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(this.uuid);
+		Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(this.uuid, true);
 
 		for (GlobalStatistic statistic : profile.getGlobalStatistics()) {
 			if (statistic.getStatType() == StatType.PRACTICE) {

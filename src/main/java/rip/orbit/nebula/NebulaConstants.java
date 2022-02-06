@@ -5,6 +5,8 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.stream.Collectors;
+
 public class NebulaConstants {
 
     public static final String CONSOLE_NAME = ChatColor.DARK_RED.toString() + ChatColor.BOLD + "Console";
@@ -30,9 +32,14 @@ public class NebulaConstants {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(player.getUniqueId());
 
-        return profile.getActiveGrant().getRank().getPrefix()
+        String addition = "";
+        if (profile.getServerProfile().isVIPStatus() && !profile.getActiveGrant().getRank().getName().equals("VIP")) {
+            addition = profile.getServerProfile().getVipStatusColor() + Nebula.getInstance().getRankHandler().fromName("VIP").getPrefix() + " ";
+        }
+
+        return (profile.getActiveGrant().getRank().getPrefix() + addition
                 + ChatColor.getLastColors(profile.getActiveGrant().getRank().getPrefix()) + name + ChatColor.WHITE + ": "
-                + profile.getChatColor() + (player.isOp() ? ChatColor.translateAlternateColorCodes('&',message):message);
+                + profile.getChatColor() + (player.isOp() ? ChatColor.translateAlternateColorCodes('&',message):message)).replaceAll("&h", profile.getServerProfile().getVipStatusColor().toString());
     }
 
 }

@@ -51,6 +51,7 @@ import rip.orbit.nebula.profile.friend.packet.FriendRequestSendPacket;
 import rip.orbit.nebula.profile.packet.PermissionAddPacket;
 import rip.orbit.nebula.profile.packet.PermissionRemovePacket;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
+import rip.orbit.nebula.profile.vip.VIPReward;
 import rip.orbit.nebula.util.CC;
 import rip.orbit.nebula.util.EncryptionHandler;
 import rip.orbit.nebula.util.JavaUtils;
@@ -67,6 +68,7 @@ public class ProfileHandler implements Listener, PacketListener {
 	private Map<UUID, Profile> cache = new HashMap<>();
 	@Getter
 	private Map<UUID, String> currentIpSession = new HashMap<>();
+	@Getter private List<VIPReward> vipRewards = new ArrayList<>();
 
 	@Getter
 	private Nebula instance;
@@ -250,7 +252,7 @@ public class ProfileHandler implements Listener, PacketListener {
 		profile.recalculateGrants();
 	}
 
-	public void save(Profile profile) {
+	public void save(Profile profile, boolean task) {
 
 		final Document document = new Document();
 
@@ -301,9 +303,13 @@ public class ProfileHandler implements Listener, PacketListener {
 			document.put("authSecret", profile.getAuthSecret());
 		}
 
-		this.instance.getServer().getScheduler().runTaskAsynchronously(this.instance, () ->
-				this.collection.replaceOne(Filters.eq("uuid", profile.getUuid().toString()), document, new ReplaceOptions().upsert(true))
-		);
+		if (task) {
+			this.instance.getServer().getScheduler().runTaskAsynchronously(this.instance, () ->
+					this.collection.replaceOne(Filters.eq("uuid", profile.getUuid().toString()), document, new ReplaceOptions().upsert(true))
+			);
+		} else {
+			this.collection.replaceOne(Filters.eq("uuid", profile.getUuid().toString()), document, new ReplaceOptions().upsert(true));
+		}
 
 	}
 
@@ -409,7 +415,12 @@ public class ProfileHandler implements Listener, PacketListener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPreLogin(AsyncPlayerPreLoginEvent event) {
 
-		final Profile profile = new Profile(event.getUniqueId(), event.getName());
+		if (this.cache.containsKey(event.getUniqueId())) {
+			event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, CC.translate("&cSomeone seems to already be on this account. If this is an error contact support."));
+			return;
+		}
+
+		Profile profile = new Profile(event.getUniqueId(), event.getName());
 
 		profile.setIpAddress(EncryptionHandler.encryptUsingKey(event.getAddress().getHostAddress()));
 
@@ -472,15 +483,15 @@ public class ProfileHandler implements Listener, PacketListener {
 			return;
 		}
 
-		final List<Profile> onlineAlts = alts.stream().filter(alt -> alt.getServerProfile().isOnline()).collect(Collectors.toList());
-
-		if (onlineAlts.size() >= 4) {
-			event.disallow(
-					AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
-					ChatColor.RED.toString() + "Spam bot prevention, please contact an admin if you think this is an error."
-			);
-			return;
-		}
+//		final List<Profile> onlineAlts = alts.stream().filter(alt -> alt.getServerProfile().isOnline()).collect(Collectors.toList());
+//
+//		if (onlineAlts.size() >= 4) {
+//			event.disallow(
+//					AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
+//					ChatColor.RED.toString() + "Spam bot prevention, please contact an admin if you think this is an error."
+//			);
+//			return;
+//		}
 
 		profile.getServerProfile().setOnline(true);
 		profile.getServerProfile().setLastLogin(System.currentTimeMillis());
@@ -497,33 +508,9 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		final Player player = event.getPlayer();
 
-		final Profile profile = this.fromUuid(player.getUniqueId());
+		final Profile profile = this.fromUuid(player.getUniqueId(), true);
 
 		profile.setup(event);
-
-		if (profile.getDisguiseProfile() == null && player.isDisguised()) {
-			player.undisguise();
-		} else if (profile.getDisguiseProfile() != null) {
-
-			player.disguise(profile.getDisguiseProfile().getName());
-
-		}
-
-		if (player.hasPermission(NebulaConstants.STAFF_PERMISSION)) {
-
-			if (profile.getAuthSecret() == null) {
-				player.setMetadata("Locked", new FixedMetadataValue(this.instance, ChatColor.RED + "Please set up your two-factor authentication using \"/2fasetup\"."));
-				player.sendMessage(ChatColor.RED + "Please set up your two-factor authentication using \"/2fasetup\".");
-				return;
-			}
-
-			if (profile.getIpAddress().equals(this.currentIpSession.get(player.getUniqueId()))) {
-				return;
-			}
-
-			player.setMetadata("Locked", new FixedMetadataValue(this.instance, ChatColor.RED + "Please provide your two-factor code. Type \"/auth <code>\" to authenticate."));
-			player.sendMessage(ChatColor.RED + "Please provide your two-factor code. Type \"/auth <code>\" to authenticate.");
-		}
 
 	}
 
@@ -534,18 +521,17 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		final Profile profile = this.fromUuid(player.getUniqueId());
 
+		if (profile == null) return;
+
 		profile.getServerProfile().setOnline(false);
 		profile.getServerProfile().setLastLogin(System.currentTimeMillis());
 		profile.getServerProfile().setLastServer(Nebula.getInstance().getConfig().getString("server.name"));
 
 		profile.save();
 
-		this.cache.remove(player.getUniqueId());
-
-		if (player.isDisguised()) {
-			player.undisguise();
+		if (!event.getPlayer().hasMetadata("location")) {
+			this.cache.remove(player.getUniqueId());
 		}
-
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
@@ -561,10 +547,9 @@ public class ProfileHandler implements Listener, PacketListener {
 
 		profile.save();
 
-		this.cache.remove(player.getUniqueId());
-
-		if (player.isDisguised()) {
-			player.undisguise();
+		if (!event.getReason().contains("location")) {
+			player.setMetadata("location", new FixedMetadataValue(Nebula.getInstance(), true));
+			this.cache.remove(player.getUniqueId());
 		}
 
 	}

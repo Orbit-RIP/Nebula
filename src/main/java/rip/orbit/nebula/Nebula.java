@@ -69,7 +69,10 @@ public class Nebula extends JavaPlugin {
 	public void onDisable() {
 		for (Profile profile : getProfileHandler().getCache().values()) {
 			profile.getServerProfile().setOnline(false);
+			profile.getServerProfile().setLastServer(getNetwork().getName());
+			profile.getServerProfile().setLastLogin(System.currentTimeMillis());
 			profile.save();
+			System.out.println("Updated to offline " + profile.getName());
 		}
 	}
 

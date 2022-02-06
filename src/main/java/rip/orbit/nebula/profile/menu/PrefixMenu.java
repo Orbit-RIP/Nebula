@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import rip.orbit.nebula.rank.Rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,7 +124,12 @@ public class PrefixMenu extends PaginatedMenu {
                             profile.setActivePrefix(prefix);
                             profile.save();
 
-                            player.setDisplayName(profile.getActiveRank().getPrefix() + prefix.getDisplay() + player.getName());
+                            Rank rank = Nebula.getInstance().getRankHandler().fromName("VIP");
+                            if (profile.getServerProfile().isVIPStatus()) {
+                                player.setDisplayName(rank.getPrefix() + prefix.getDisplay() + rank.getPrefix() + " " + profile.getServerProfile().getVipStatusColor() + player.getName());
+                            } else {
+                                player.setDisplayName(profile.getActiveRank().getPrefix() + prefix.getDisplay() + player.getName());
+                            }
                         }
 
                         player.sendMessage(ChatColor.GOLD + "Changed your prefix to: " + ChatColor.WHITE + prefix.getDisplay());

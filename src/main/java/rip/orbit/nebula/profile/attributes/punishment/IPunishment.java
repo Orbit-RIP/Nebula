@@ -1,5 +1,6 @@
 package rip.orbit.nebula.profile.attributes.punishment;
 
+import org.bukkit.Bukkit;
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.NebulaConstants;
 import rip.orbit.nebula.profile.attributes.api.Executable;
@@ -9,6 +10,8 @@ import cc.fyre.proton.util.TimeUtils;
 import org.bson.Document;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.util.CC;
+import rip.orbit.nebula.util.fanciful.FancyMessage;
 
 import java.util.UUID;
 
@@ -58,7 +61,15 @@ public interface IPunishment extends Executable {
 //        message = (silent ? NeutronConstants.SILENT_PREFIX + ChatColor.GREEN + " ":"") + message;
 
         if (!silent) {
-            Nebula.getInstance().getServer().broadcastMessage(message);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.hasPermission("orbit.staff")) {
+                    FancyMessage fancyMessage = new FancyMessage(message);
+                    fancyMessage.tooltip(CC.translate("&6Reason: &f" + this.getExecutedReason(), (this instanceof RemoveAblePunishment ? "&6Duration: &f" + ((RemoveAblePunishment)this).getDurationString() : "")));
+                    fancyMessage.send(player);
+                } else {
+                    Nebula.getInstance().getServer().broadcastMessage(message);
+                }
+            }
         } else {
 
             for (Player loopPlayer : Nebula.getInstance().getServer().getOnlinePlayers()) {
@@ -67,7 +78,10 @@ public interface IPunishment extends Executable {
                     continue;
                 }
 
-                loopPlayer.sendMessage(message);
+                FancyMessage fancyMessage = new FancyMessage(message);
+                fancyMessage.tooltip(CC.translate("&6Reason: &f" + this.getExecutedReason(), (this instanceof RemoveAblePunishment ? "&6Duration: &f" + ((RemoveAblePunishment)this).getDurationString() : "")));
+
+                fancyMessage.send(loopPlayer);
             }
         }
 

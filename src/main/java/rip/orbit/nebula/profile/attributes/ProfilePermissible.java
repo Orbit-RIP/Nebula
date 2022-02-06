@@ -40,6 +40,8 @@ public class ProfilePermissible extends PermissibleBase {
     @Override
     public boolean hasPermission(String permission) {
 
+        if (this.profile == null) return false;
+
         final List<String> permissions = this.profile.getEffectivePermissions();
 
         permissions.add(Server.BROADCAST_CHANNEL_USERS);

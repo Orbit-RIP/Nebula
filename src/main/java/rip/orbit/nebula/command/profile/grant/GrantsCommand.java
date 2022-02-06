@@ -2,7 +2,7 @@ package rip.orbit.nebula.command.profile.grant;
 
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.profile.Profile;
-import rip.orbit.nebula.profile.menu.GrantsMenu;
+import rip.orbit.nebula.profile.menu.grants.GrantsMenu;
 import cc.fyre.proton.command.Command;
 import cc.fyre.proton.command.param.Parameter;
 import org.bukkit.entity.Player;

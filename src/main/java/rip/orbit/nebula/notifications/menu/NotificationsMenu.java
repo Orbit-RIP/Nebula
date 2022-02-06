@@ -13,7 +13,7 @@ import rip.orbit.nebula.notifications.menu.button.ManageNotificationButton;
 import rip.orbit.nebula.notifications.menu.button.NotificationButton;
 import rip.orbit.nebula.notifications.menu.button.ReadNotificationsButton;
 import rip.orbit.nebula.notifications.menu.button.ViewAllReadNotificationsButton;
-import rip.orbit.nebula.profile.menu.ProfileMenu;
+import rip.orbit.nebula.profile.menu.profile.ProfileMenu;
 import rip.orbit.nebula.util.CC;
 
 import java.util.*;

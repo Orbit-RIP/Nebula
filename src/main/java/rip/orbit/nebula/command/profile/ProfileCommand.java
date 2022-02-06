@@ -1,6 +1,6 @@
 package rip.orbit.nebula.command.profile;
 
-import rip.orbit.nebula.profile.menu.ProfileMenu;
+import rip.orbit.nebula.profile.menu.profile.ProfileMenu;
 import cc.fyre.proton.command.Command;
 import cc.fyre.proton.command.param.Parameter;
 import org.bukkit.entity.Player;

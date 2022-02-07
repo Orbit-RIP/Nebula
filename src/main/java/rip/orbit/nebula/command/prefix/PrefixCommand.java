@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class PrefixCommand {
 
     @Command(
-            names = {"prefix"},
+            names = {"prefix", "tag"},
             permission = ""
      )
     public static void execute(Player player) {

@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 public class PrefixRenameCommand {
 
     @Command(
-            names = {"prefix rename","prefix setname","prefix changename","prefix modifyname"},
+            names = {"prefix rename","prefix setname","prefix changename","prefix modifyname", "tag setname"},
             permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix,@Parameter(name = "name")String name) {

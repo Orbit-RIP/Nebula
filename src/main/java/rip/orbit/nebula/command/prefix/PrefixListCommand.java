@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class PrefixListCommand {
 
     @Command(
-            names = {"prefix list"},
+            names = {"prefix list", "tag list"},
             permission = "orbit.owner"
     )
     public static void execute(CommandSender sender) {

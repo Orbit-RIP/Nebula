@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 public class PrefixSetDisplayCommand {
 
     @Command(
-            names = {"prefix setdisplay","prefix changedisplay","prefix modifydisplay"},
+            names = {"prefix setdisplay","prefix changedisplay","prefix modifydisplay", "tag setdisplay"},
             permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix,@Parameter(name = "display",wildcard = true)String display) {

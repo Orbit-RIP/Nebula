@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public class PrefixDeleteCommand {
 
     @Command(
-            names = {"prefix delete"},
+            names = {"prefix delete", "tag delete", "tag remove"},
             permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "prefix") Prefix prefix) {

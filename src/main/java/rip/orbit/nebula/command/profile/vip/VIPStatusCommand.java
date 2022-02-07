@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public class VIPStatusCommand {
 
-	@Command(names = {"vipstatus"}, permission = "")
+	@Command(names = {"vipstatus", "vip"}, permission = "")
 	public static void vipstatuscheck(Player sender) {
 		new VIPMenu().openMenu(sender);
 	}

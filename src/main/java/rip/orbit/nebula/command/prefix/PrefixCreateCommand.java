@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PrefixCreateCommand {
 
     @Command(
-            names = {"prefix create"},
+            names = {"prefix create", "tag create"},
             permission = "orbit.owner"
     )
     public static void execute(CommandSender sender,@Parameter(name = "name")String name) {

@@ -4,6 +4,7 @@ import rip.orbit.nebula.profile.Profile;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.util.CC;
 
 import java.util.stream.Collectors;
 
@@ -32,12 +33,17 @@ public class NebulaConstants {
 
         final Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(player.getUniqueId());
 
-        String addition = "";
-        if (profile.getServerProfile().isVIPStatus() && !profile.getActiveGrant().getRank().getName().equals("VIP")) {
-            addition = profile.getServerProfile().getVipStatusColor() + Nebula.getInstance().getRankHandler().fromName("VIP").getPrefix() + " ";
+        String prefix = "";
+        if (profile.getActivePrefix() != null) {
+            prefix = profile.getActivePrefix().getDisplay() + CC.translate("&r ");
         }
 
-        return (profile.getActiveGrant().getRank().getPrefix() + addition
+        String addition = "";
+        if (profile.getServerProfile().isVIPStatus() && !profile.getActiveGrant().getRank().getName().equals("VIP")) {
+            addition = profile.getServerProfile().getVipStatusColor() + Nebula.getInstance().getRankHandler().fromName("VIP").getPrefix();
+        }
+
+        return (prefix + profile.getActiveGrant().getRank().getPrefix() + addition
                 + ChatColor.getLastColors(profile.getActiveGrant().getRank().getPrefix()) + name + ChatColor.WHITE + ": "
                 + profile.getChatColor() + (player.isOp() ? ChatColor.translateAlternateColorCodes('&',message):message)).replaceAll("&h", profile.getServerProfile().getVipStatusColor().toString());
     }

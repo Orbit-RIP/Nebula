@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77fad4a1-12fa-4257-aa30-207c8a60e274" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/ProfileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/ProfileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/namemc/NameMCCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/command/profile/namemc/NameMCCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/friend/menu/button/FriendButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/friend/menu/button/FriendButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/HistoryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/HistoryMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/MainHistoryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/history/MainHistoryMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/ProfileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/ProfileHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixCreateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixCreateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixDeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixDeleteCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixListCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixListCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixRenameCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixRenameCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixSetDisplayCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/prefix/PrefixSetDisplayCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/vip/VIPStatusCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/command/profile/vip/VIPStatusCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/history/HistoryMenu$PunishmentButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/history/HistoryMenu$PunishmentButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/history/MainHistoryMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/history/MainHistoryMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
@@ -42,6 +53,9 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="4" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1zs174MUOEOgzHMjdTSUiOQ9yiH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,7 +66,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Rocket" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.13908207" />
@@ -125,6 +139,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

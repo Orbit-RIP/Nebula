@@ -43,7 +43,7 @@ public class NameMCCommand {
 		}
 
 		profile.getServerProfile().setClaimedNameMC(true);
-		Bukkit.broadcastMessage(CC.translate("&6&l[NAME MC] " + profile.getNameWithRank() + " &fhas just claimed their &e&nfree&f Star Rank by &b&nliking&f our &9&lNameMC Page&f! &7(/namemc)"));
+		Bukkit.broadcastMessage(CC.translate("&6&l[NAMEMC] " + profile.getNameWithRank() + " &fhas just claimed their &e&nFREE&f Star Rank by &b&nliking&f our &9&lNameMC Page&f! &7(/namemc)"));
 
 		Rank rank = Nebula.getInstance().getRankHandler().fromName("Star");
 

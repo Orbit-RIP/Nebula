@@ -49,7 +49,7 @@ public class FriendButton extends Button {
 			lore.add("&6&l┃ &fLast Seen: &6" + profile.getServerProfile().getLastSeenString() + " ago");
 		}
 		lore.add(" ");
-		lore.add("&7&oClick to remove " + profile.getName() + " from your friends list.");
+		lore.add("&aClick to remove " + profile.getName() + " from your friends list.");
 		lore.add("&7&m-----------------");
 
 		return CC.translate(lore);

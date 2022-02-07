@@ -203,8 +203,8 @@ public class HistoryMenu extends Menu {
                 final RemoveAblePunishment removeAblePunishment = (RemoveAblePunishment) iPunishment;
 
                 toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
-                toReturn.add(ChatColor.YELLOW + "By: " + (player.hasPermission(NebulaConstants.ADMIN_PERMISSION) ? removeAblePunishment.getExecutedByFancyName() : ChatColor.MAGIC + removeAblePunishment.getExecutedByFancyName()));
-                toReturn.add(ChatColor.YELLOW + "Silent: " + ChatColor.RED + (removeAblePunishment.getExecutedSilent() ? "Yes" : "No"));
+                toReturn.add(ChatColor.YELLOW + "Punisher: " + (player.hasPermission("orbit.admin") ? removeAblePunishment.getExecutedByFancyName() : ChatColor.MAGIC + removeAblePunishment.getExecutedByFancyName()));
+                toReturn.add(ChatColor.YELLOW + "Silent?: " + ChatColor.RED + (removeAblePunishment.getExecutedSilent() ? "Yes" : "No"));
                 toReturn.add(ChatColor.YELLOW + "Reason: " + ChatColor.RED + removeAblePunishment.getExecutedReason());
 
                 if (removeAblePunishment.isActive() && !removeAblePunishment.isPermanent()) {
@@ -217,10 +217,10 @@ public class HistoryMenu extends Menu {
 
                 if (removeAblePunishment.isPardoned()) {
                     toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);
-                    toReturn.add(ChatColor.YELLOW + "Pardoned By: " + removeAblePunishment.getPardonedByFancyName());
-                    toReturn.add(ChatColor.YELLOW + "Pardoned At: " + ChatColor.RED + TimeUtils.formatIntoCalendarString(new Date(removeAblePunishment.getPardonedAt())));
-                    toReturn.add(ChatColor.YELLOW + "Pardoned Silent: " + ChatColor.RED + (removeAblePunishment.getPardonedSilent() ? "Yes" : "No"));
-                    toReturn.add(ChatColor.YELLOW + "Pardoned Reason: " + ChatColor.RED + removeAblePunishment.getPardonedReason());
+                    toReturn.add(ChatColor.YELLOW + "Removed By: " + removeAblePunishment.getPardonedByFancyName());
+                    toReturn.add(ChatColor.YELLOW + "Removed At: " + ChatColor.RED + TimeUtils.formatIntoCalendarString(new Date(removeAblePunishment.getPardonedAt())));
+                    toReturn.add(ChatColor.YELLOW + "Was Silent?: " + ChatColor.RED + (removeAblePunishment.getPardonedSilent() ? "Yes" : "No"));
+                    toReturn.add(ChatColor.YELLOW + "Removal Reason: " + ChatColor.RED + removeAblePunishment.getPardonedReason());
                 }
             } else {
                 toReturn.add(ChatColor.GRAY + NebulaConstants.MENU_BAR);

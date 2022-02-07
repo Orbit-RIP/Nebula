@@ -162,6 +162,7 @@ public class Profile {
 			return player.getDisplayName();
 		}
 
+
 		if (this.getActiveRank().getName().equals("VIP")) {
 			return this.getServerProfile().getVipStatusColor().toString() + this.name;
 		}

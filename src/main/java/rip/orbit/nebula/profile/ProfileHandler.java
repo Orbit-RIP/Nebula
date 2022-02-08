@@ -41,6 +41,7 @@ import rip.orbit.nebula.profile.attributes.punishment.packet.PunishmentExecutePa
 import rip.orbit.nebula.profile.attributes.punishment.packet.PunishmentPardonPacket;
 import rip.orbit.nebula.profile.attributes.rollback.Rollback;
 import rip.orbit.nebula.profile.attributes.server.ServerProfile;
+import rip.orbit.nebula.profile.attributes.wrapped.IWrapped;
 import rip.orbit.nebula.profile.disguise.DisguiseProfile;
 import rip.orbit.nebula.profile.event.GrantExpireEvent;
 import rip.orbit.nebula.profile.friend.FriendRequest;
@@ -156,6 +157,8 @@ public class ProfileHandler implements Listener, PacketListener {
 			}
 		}
 
+
+
 		if (document.containsKey("serverProfile")) {
 			profile.setServerProfile(new ServerProfile(document.get("serverProfile", Document.class)));
 		}
@@ -233,6 +236,12 @@ public class ProfileHandler implements Listener, PacketListener {
 			}
 		}
 
+		if (document.containsKey("wraps")) {
+			for (JsonElement jsonElement : new JsonParser().parse(document.getString("wraps")).getAsJsonArray()) {
+				profile.getWraps().add(IWrapped.deserialize(jsonElement.getAsJsonObject()));
+			}
+		}
+
 		if (document.containsKey("permissions")) {
 			profile.setPermissions(Proton.PLAIN_GSON.<List<String>>fromJson(document.getString("permissions"), ArrayList.class));
 		}
@@ -274,9 +283,13 @@ public class ProfileHandler implements Listener, PacketListener {
 		document.put("blocked", Proton.PLAIN_GSON.toJson(profile.getBlocked().stream().map(UUID::toString).collect(Collectors.toList())));
 		document.put("friends", Proton.PLAIN_GSON.toJson(profile.getFriends().stream().map(UUID::toString).collect(Collectors.toList())));
 
-		JsonArray friendrequests = new JsonArray();
-		profile.getFriendRequests().forEach(request -> friendrequests.add(request.serialize()));
-		document.put("friendRequests", friendrequests.toString());
+		JsonArray friendRequests = new JsonArray();
+		profile.getFriendRequests().forEach(request -> friendRequests.add(request.serialize()));
+		document.put("friendRequests", friendRequests.toString());
+
+		JsonArray wraps = new JsonArray();
+		profile.getWraps().forEach(wrap -> wraps.add(wrap.serialize()));
+		document.put("wraps", wraps.toString());
 
 		document.put("activeGrant", profile.getActiveGrant().getUuid().toString());
 
@@ -285,12 +298,12 @@ public class ProfileHandler implements Listener, PacketListener {
 		}
 
 		for (GlobalStatistic statistic : profile.getGlobalStatistics()) {
-			document.put(statistic.getStatType().name() + "kills", statistic.getKills());
-			document.put(statistic.getStatType().name() + "deaths", statistic.getDeaths());
-			document.put(statistic.getStatType().name() + "killStreak", statistic.getKillStreak());
-			document.put(statistic.getStatType().name() + "highestKillStreak", statistic.getHighestKillStreak());
-			document.put(statistic.getStatType().name() + "seasonsPlayed", statistic.getSeasonsPlayed());
-			document.put(statistic.getStatType().name() + "pastTeams", Proton.PLAIN_GSON.toJson(statistic.getPastTeams()));
+			document.put(statistic.getStatType().name() + "-kills", statistic.getKills());
+			document.put(statistic.getStatType().name() + "-deaths", statistic.getDeaths());
+			document.put(statistic.getStatType().name() + "-killStreak", statistic.getKillStreak());
+			document.put(statistic.getStatType().name() + "-highestKillStreak", statistic.getHighestKillStreak());
+			document.put(statistic.getStatType().name() + "-seasonsPlayed", statistic.getSeasonsPlayed());
+			document.put(statistic.getStatType().name() + "-pastTeams", Proton.PLAIN_GSON.toJson(statistic.getPastTeams()));
 		}
 
 		document.put("notes", Proton.PLAIN_GSON.toJson(profile.getNotes().stream().map(note -> note.toDocument().toJson()).collect(Collectors.toList())));

@@ -17,6 +17,7 @@ import rip.orbit.nebula.profile.attributes.rollback.RollbackType;
 import rip.orbit.nebula.rank.Rank;
 import rip.orbit.nebula.rank.RankHandler;
 import rip.orbit.nebula.server.ServerHandler;
+import rip.orbit.nebula.timer.TimerHandler;
 import rip.orbit.nebula.util.DurationWrapper;
 
 @Getter
@@ -34,6 +35,7 @@ public class Nebula extends JavaPlugin {
 	private ProfileHandler profileHandler;
 	private ServerHandler serverHandler;
 	private NotificationHandler notificationHandler;
+	private TimerHandler timerHandler;
 
 	private boolean isTestServer = false;
 
@@ -49,6 +51,7 @@ public class Nebula extends JavaPlugin {
 
 		this.notificationHandler = new NotificationHandler();
 		this.serverHandler = new ServerHandler();
+		this.timerHandler = new TimerHandler();
 		this.rankHandler = new RankHandler(this);
 		this.prefixHandler = new PrefixHandler(this);
 		this.profileHandler = new ProfileHandler(this);

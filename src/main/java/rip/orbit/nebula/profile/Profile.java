@@ -20,6 +20,7 @@ import rip.orbit.nebula.profile.attributes.punishment.comparator.PunishmentDateC
 import rip.orbit.nebula.profile.attributes.punishment.impl.RemoveAblePunishment;
 import rip.orbit.nebula.profile.attributes.rollback.Rollback;
 import rip.orbit.nebula.profile.attributes.server.ServerProfile;
+import rip.orbit.nebula.profile.attributes.wrapped.IWrapped;
 import rip.orbit.nebula.profile.disguise.DisguiseProfile;
 import rip.orbit.nebula.profile.friend.FriendRequest;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
@@ -53,6 +54,7 @@ public class Profile {
     private List<Rollback> rollbacks;
     private List<String> permissions;
     private List<IPunishment> punishments;
+    private List<IWrapped> wraps = new ArrayList<>();
 
     private List<GlobalStatistic> globalStatistics = new ArrayList<>();
 
@@ -82,6 +84,7 @@ public class Profile {
         this.grants = new ArrayList<>();
         this.permissions = new ArrayList<>();
         this.punishments = new ArrayList<>();
+        this.wraps = new ArrayList<>();
 
         this.authSecret = null;
 

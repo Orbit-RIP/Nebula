@@ -53,11 +53,11 @@ public class ProfileMenu extends Menu {
 			buttons.put(20, new OpenNotificationsButton(this.uuid, true));
 			buttons.put(22, new OpenFriendsButton(this.uuid, true));
 			buttons.put(4, new ProfileViewButton(this.uuid));
-			buttons.put(24, new OpenGlobalStatsButton(this.uuid));
+			buttons.put(24, new OpenGlobalStatsButton(this.uuid, true));
 		} else {
 			buttons.put(4, new ProfileViewButton(this.uuid));
 			buttons.put(21, new OpenFriendsButton(this.uuid, false));
-			buttons.put(23, new OpenGlobalStatsButton(this.uuid));
+			buttons.put(23, new OpenGlobalStatsButton(this.uuid, false));
 		}
 
 		return buttons;

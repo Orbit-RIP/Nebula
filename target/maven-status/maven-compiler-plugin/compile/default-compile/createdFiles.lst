@@ -2,6 +2,7 @@ rip\orbit\nebula\profile\friend\menu\button\ViewFriendRequestsButton.class
 rip\orbit\nebula\util\fanciful\JsonString.class
 rip\orbit\nebula\Nebula.class
 rip\orbit\nebula\profile\menu\profile\GlobalStatsMenu.class
+rip\orbit\nebula\profile\menu\profile\buttons\GlobalStatsButton.class
 rip\orbit\nebula\command\profile\punishment\pardon\UnMuteCommand.class
 rip\orbit\nebula\command\prefix\PrefixSetDisplayCommand.class
 rip\orbit\nebula\command\profile\grant\SetRankCommand.class
@@ -11,6 +12,7 @@ rip\orbit\nebula\profile\comparator\ProfileWeightComparator.class
 rip\orbit\nebula\profile\vip\menu\VIPMenu.class
 rip\orbit\nebula\server\ServerHandler.class
 rip\orbit\nebula\util\fanciful\JsonRepresentedObject.class
+rip\orbit\nebula\profile\attributes\wrapped\menu\WrappedMenu.class
 rip\orbit\nebula\profile\attributes\grant\Grant.class
 rip\orbit\nebula\profile\menu\NotesMenu$1.class
 rip\orbit\nebula\profile\attributes\rollback\comparator\RollbackComparator.class
@@ -43,6 +45,7 @@ rip\orbit\nebula\command\prefix\PrefixDeleteCommand$PrefixDeletePrompt.class
 rip\orbit\nebula\util\fanciful\MessagePart.class
 rip\orbit\nebula\profile\menu\history\HistoryMenu$NextPageButton.class
 rip\orbit\nebula\server\command\ServerCommand.class
+rip\orbit\nebula\profile\attributes\wrapped\menu\WrappedMenu$PreviousPageButton.class
 rip\orbit\nebula\profile\attributes\rollback\menu\RollbackHistoryMenu$1.class
 rip\orbit\nebula\profile\attributes\api\Executable.class
 rip\orbit\nebula\command\profile\SeenCommand.class
@@ -100,6 +103,7 @@ rip\orbit\nebula\command\profile\punishment\execute\BlacklistCommand.class
 rip\orbit\nebula\profile\menu\grants\GrantsMenu$RemovePrompt.class
 rip\orbit\nebula\prefix\menu\PrefixListMenu.class
 rip\orbit\nebula\profile\menu\grants\GrantMenu.class
+rip\orbit\nebula\profile\attributes\wrapped\menu\button\WrappedButton.class
 rip\orbit\nebula\command\profile\ProfileCommand.class
 rip\orbit\nebula\profile\menu\SiblingsMenu$1.class
 rip\orbit\nebula\util\MojangUtil.class
@@ -170,6 +174,7 @@ rip\orbit\nebula\profile\menu\profile\buttons\OpenGlobalStatsButton.class
 rip\orbit\nebula\command\rank\permission\RankPermissionAddCommand.class
 rip\orbit\nebula\profile\attributes\punishment\packet\PunishmentExecutePacket.class
 rip\orbit\nebula\profile\friend\packet\FriendRequestSendPacket.class
+rip\orbit\nebula\profile\attributes\wrapped\menu\WrappedMenu$NextPageButton.class
 rip\orbit\nebula\profile\vip\menu\buttons\VIPColorButton.class
 rip\orbit\nebula\profile\attributes\grant\GrantBuilder.class
 rip\orbit\nebula\profile\menu\PrefixMenu$1.class
@@ -203,6 +208,7 @@ rip\orbit\nebula\util\fanciful\TextualComponent$ComplexTextTypeComponent$1.class
 rip\orbit\nebula\notifications\menu\ManageNotificationsMenu$PreviousPageButton.class
 rip\orbit\nebula\profile\menu\history\HistoryMenu$PunishmentButton.class
 rip\orbit\nebula\profile\attributes\ProfilePermissible.class
+rip\orbit\nebula\profile\attributes\wrapped\menu\WrappedMenu$1.class
 rip\orbit\nebula\profile\menu\history\HistoryMenu$1.class
 rip\orbit\nebula\rank\Rank.class
 rip\orbit\nebula\profile\attributes\punishment\IPunishment.class

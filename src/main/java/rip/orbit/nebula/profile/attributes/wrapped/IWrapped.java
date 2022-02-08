@@ -7,11 +7,9 @@ import org.bukkit.Material;
 import rip.orbit.nebula.util.JsonDeserializer;
 import rip.orbit.nebula.util.JsonSerializer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
@@ -87,6 +85,26 @@ public class IWrapped {
 		}
 
 		return iWrapped;
+	}
+
+	public String mostUsedPartnerItem() {
+		List<Map.Entry<String, Integer>> items = this.partnerItemUsedMap.entrySet().stream().sorted(Comparator.comparingInt(Map.Entry::getValue)).collect(Collectors.toList());
+
+		if (items.size() == 0) {
+			return "None";
+		}
+
+		return items.get(0).getKey();
+	}
+
+	public String mostUsedItem() {
+		List<Map.Entry<Material, Integer>> items = this.usedMap.entrySet().stream().sorted(Comparator.comparingInt(Map.Entry::getValue)).collect(Collectors.toList());
+
+		if (items.size() == 0) {
+			return "None";
+		}
+
+		return items.get(0).getKey().name();
 	}
 
 }

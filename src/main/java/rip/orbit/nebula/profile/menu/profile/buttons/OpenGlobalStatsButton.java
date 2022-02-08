@@ -23,6 +23,7 @@ import java.util.UUID;
 public class OpenGlobalStatsButton extends Button {
 
 	private UUID uuid;
+	private boolean backButton;
 
 	@Override
 	public String getName(Player var1) {
@@ -52,6 +53,6 @@ public class OpenGlobalStatsButton extends Button {
 
 	@Override
 	public void clicked(Player player, int slot, ClickType clickType) {
-		new GlobalStatsMenu(this.uuid).openMenu(player);
+		new GlobalStatsMenu(this.uuid, backButton).openMenu(player);
 	}
 }

@@ -5,24 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77fad4a1-12fa-4257-aa30-207c8a60e274" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/IWrapped.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/WrappedType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/command/ExampleWrapCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/menu/ExampleWrapMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/menu/button/ExampleWrapButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/command/GlobalTimerCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/util/JsonDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/util/JsonSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/menu/WrappedMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/menu/button/WrappedButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/GlobalStatsButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/Nebula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/Nebula.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/ProfileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/ProfileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/TimerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/TimerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/packet/TimerUpdatePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/timer/packet/TimerUpdatePacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/IWrapped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/IWrapped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/WrappedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/attributes/wrapped/WrappedType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/OpenGlobalStatsButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/nebula/profile/menu/profile/buttons/OpenGlobalStatsButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Nebula-1.0-DEV.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/Profile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/ProfileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/ProfileHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/wrapped/IWrapped.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/wrapped/IWrapped.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/wrapped/WrappedType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/attributes/wrapped/WrappedType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/GlobalStatsMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/ProfileMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/ProfileMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/buttons/OpenGlobalStatsButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/profile/menu/profile/buttons/OpenGlobalStatsButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/TimerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/TimerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/command/GlobalTimerCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/packet/TimerUpdatePacket.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rip/orbit/nebula/timer/packet/TimerUpdatePacket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />

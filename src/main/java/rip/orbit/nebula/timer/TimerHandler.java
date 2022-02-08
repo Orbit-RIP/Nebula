@@ -70,6 +70,7 @@ public class TimerHandler implements PacketListener {
 		timer.setCreatedAt(document.getLong("createdAt"));
 		timer.setDuration(document.getLong("duration"));
 
+		this.timers.add(timer);
 	}
 
 	public void save(Timer timer) {

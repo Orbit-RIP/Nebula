@@ -3,6 +3,7 @@ D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\vip\menu\buttons\VIPB
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\menu\history\buttons\SelectPunishmentTypeButton.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\rank\menu\editor\menu\attribute\extra\RankSelectColorMenu.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\rank\menu\editor\menu\attribute\RankModifyPrefixButton.java
+D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\wrapped\menu\button\WrappedButton.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\grant\packet\GrantRemovePacket.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\util\fanciful\FancyMessage.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\friend\menu\button\AcceptAllFriendRequestsButton.java
@@ -46,6 +47,7 @@ D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\command\prefix\PrefixListComm
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\timer\command\GlobalTimerCommand.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\command\profile\friend\FriendCommands.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\rank\Rank.java
+D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\wrapped\menu\WrappedMenu.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\menu\profile\buttons\OpenNotificationsButton.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\punishment\packet\PunishmentExecutePacket.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\server\ServerProfile.java
@@ -77,6 +79,7 @@ D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\notifications\menu\button\Man
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\server\command\ServerCommand.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\vip\VIPReward.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\rank\comparator\RankWeightComparator.java
+D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\menu\profile\buttons\GlobalStatsButton.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\util\JsonDeserializer.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\profile\attributes\punishment\impl\Punishment.java
 D:\Orbit Dev\Nebula\src\main\java\rip\orbit\nebula\rank\menu\editor\button\RankInfoButton.java

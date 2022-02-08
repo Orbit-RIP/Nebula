@@ -2,7 +2,10 @@ package rip.orbit.nebula.profile.menu.profile;
 
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.profile.attributes.wrapped.WrappedType;
+import rip.orbit.nebula.profile.attributes.wrapped.menu.WrappedMenu;
 import rip.orbit.nebula.profile.menu.profile.ProfileMenu;
+import rip.orbit.nebula.profile.menu.profile.buttons.GlobalStatsButton;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
 import rip.orbit.nebula.profile.stat.StatType;
 import cc.fyre.proton.Proton;
@@ -33,6 +36,7 @@ public class GlobalStatsMenu extends Menu {
 	private static int[] WINDOW_SLOTS_GOLD = {0,};
 
 	private UUID uuid;
+	private boolean backButton;
 
 	@Override
 	public String getTitle(Player player) {
@@ -62,55 +66,46 @@ public class GlobalStatsMenu extends Menu {
 
 		for (GlobalStatistic statistic : profile.getGlobalStatistics()) {
 			if (statistic.getStatType() == StatType.PRACTICE) {
-				buttons.put(20, Button.fromItem(
-						ItemBuilder.of(Material.IRON_SWORD)
-								.name("&6&lPractice Statistics")
-								.setLore(Arrays.asList(
-										"&7&m--------------",
-										"&6&l┃ &fWins: &6" + statistic.getKills(),
-										"&6&l┃ &fLoses: &6" + statistic.getDeaths(),
-										"&6&l┃ &fSeasons Played: &6" + statistic.getSeasonsPlayed(),
-										"&7",
-										"&6&l┃ &fWin Streak: &6" + statistic.getKillStreak(),
-										"&6&l┃ &fHighest Win Streak: &6" + statistic.getHighestKillStreak(),
-										"&7&m--------------"
-								))
-								.build()
-				));
+				buttons.put(20, new GlobalStatsButton(new WrappedMenu(uuid, backButton, WrappedType.PRACTICE, 1), "&6&lPractice Statistics", Arrays.asList(
+						"&7&m--------------",
+						"&6&l┃ &fWins: &6" + statistic.getKills(),
+						"&6&l┃ &fLoses: &6" + statistic.getDeaths(),
+						"&6&l┃ &fSeasons Played: &6" + statistic.getSeasonsPlayed(),
+						"&7",
+						"&6&l┃ &fWin Streak: &6" + statistic.getKillStreak(),
+						"&6&l┃ &fHighest Win Streak: &6" + statistic.getHighestKillStreak(),
+						" ",
+						" &7&oClick to view all of your wrappeds for this gamemode",
+						"&7&m--------------"
+				), Material.IRON_SWORD));
 			} else if (statistic.getStatType() == StatType.KITS) {
-				buttons.put(22, Button.fromItem(
-						ItemBuilder.of(Material.BOW)
-								.name("&6&lKitmap Statistics")
-								.setLore(Arrays.asList(
-										"&7&m--------------",
-										"&6&l┃ &fKills: &6" + statistic.getKills(),
-										"&6&l┃ &fDeaths: &6" + statistic.getDeaths(),
-										"&6&l┃ &fSeasons Played: &6" + statistic.getSeasonsPlayed(),
-										"&7",
-										"&6&l┃ &fKill Streak: &6" + statistic.getKillStreak(),
-										"&6&l┃ &fHighest Kill Streak: &6" + statistic.getHighestKillStreak(),
-										"&6&l┃ &fPast Teams: &6" + (statistic.getPastTeams().isEmpty() ? "&cNone" : StringUtils.join(statistic.getPastTeams(), ", ")),
-										"&7&m--------------"
-								))
-								.build()
-				));
+				buttons.put(22, new GlobalStatsButton(new WrappedMenu(uuid, backButton, WrappedType.KITS, 1), "&6&lKitmap Statistics", Arrays.asList(
+						"&7&m--------------",
+						"&6&l┃ &fKills: &6" + statistic.getKills(),
+						"&6&l┃ &fDeaths: &6" + statistic.getDeaths(),
+						"&6&l┃ &fMaps Played: &6" + statistic.getSeasonsPlayed(),
+						"&7",
+						"&6&l┃ &fKill Streak: &6" + statistic.getKillStreak(),
+						"&6&l┃ &fHighest Kill Streak: &6" + statistic.getHighestKillStreak(),
+						"&6&l┃ &fPast Teams: &6" + (statistic.getPastTeams().isEmpty() ? "&cNone" : StringUtils.join(statistic.getPastTeams(), ", ")),
+						" ",
+						" &7&oClick to view all of your wrappeds for this gamemode",
+						"&7&m--------------"
+				), Material.BOW));
 			} else if (statistic.getStatType() == StatType.HCF) {
-				buttons.put(24, Button.fromItem(
-						ItemBuilder.of(Material.DIAMOND_SWORD)
-								.name("&6&lHCF Statistics")
-								.setLore(Arrays.asList(
-										"&7&m--------------",
-										"&6&l┃ &fKills: &6" + statistic.getKills(),
-										"&6&l┃ &fDeaths: &6" + statistic.getDeaths(),
-										"&6&l┃ &fMaps Played: &6" + statistic.getSeasonsPlayed(),
-										"&7",
-										"&6&l┃ &fKill Streak: &6" + statistic.getKillStreak(),
-										"&6&l┃ &fHighest Kill Streak: &6" + statistic.getHighestKillStreak(),
-										"&6&l┃ &fPast Teams: &6" + (statistic.getPastTeams().isEmpty() ? "&cNone" : StringUtils.join(statistic.getPastTeams(), ", ")),
-										"&7&m--------------"
-								))
-								.build()
-				));
+				buttons.put(24, new GlobalStatsButton(new WrappedMenu(uuid, backButton, WrappedType.HCF, 1), "&6&lHCF Statistics", Arrays.asList(
+						"&7&m--------------",
+						"&6&l┃ &fKills: &6" + statistic.getKills(),
+						"&6&l┃ &fDeaths: &6" + statistic.getDeaths(),
+						"&6&l┃ &fMaps Played: &6" + statistic.getSeasonsPlayed(),
+						"&7",
+						"&6&l┃ &fKill Streak: &6" + statistic.getKillStreak(),
+						"&6&l┃ &fHighest Kill Streak: &6" + statistic.getHighestKillStreak(),
+						"&6&l┃ &fPast Teams: &6" + (statistic.getPastTeams().isEmpty() ? "&cNone" : StringUtils.join(statistic.getPastTeams(), ", ")),
+						" ",
+						" &7&oClick to view all of your wrappeds for this gamemode",
+						"&7&m--------------"
+				), Material.DIAMOND_SWORD));
 			}
 		}
 

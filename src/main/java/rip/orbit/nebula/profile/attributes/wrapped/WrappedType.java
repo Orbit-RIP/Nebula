@@ -7,6 +7,6 @@ package rip.orbit.nebula.profile.attributes.wrapped;
  */
 public enum WrappedType {
 
-	PRACTICE, KITS, HCF
+	PRACTICE, KITS, HCF, ALL
 
 }
